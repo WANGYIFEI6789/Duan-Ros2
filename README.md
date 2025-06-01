@@ -2,7 +2,8 @@
 Image文件夹存放的是后续在讲解中会用到的图片  
 Node文件夹用来存放学习基础知识时编写的代码  
 Topic文件夹是在学习topic通信时编写的代码  
-duan-src是存放项目代码的文件夹
+duan-src是存放项目代码的文件夹  
+Cpp-YiFei存放C++新特性示例代码
 # 运行小海龟
 我们学习每个编程语言的时候，第一次学都是会去打印hello world  
 同理，学习ros2的时候会去打印小海龟
@@ -144,3 +145,13 @@ colcon build --packages-select demo_cpp_pkg
 <depend>rclpy</depend>
 <depend>demo_cpp_pkg</depend>
 ```
+# 用得到的C++新特性
+示例都在Cpp-YiFei文件夹下  
+auto 自动类型推导  
+make_shared 创建智能指针  
+Lambda 匿名函数  
+functional 函数包装器：在C++中有以下几种函数：  
+1.自由函数（就是在外部封装一个函数，需要的时候去调用即可）
+2.成员函数
+3.Lambda函数  
+通过函数包装器可以实现统一的调用方法  
