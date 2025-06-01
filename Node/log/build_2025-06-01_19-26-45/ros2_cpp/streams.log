@@ -1,4 +1,0 @@
-[0.017s] Invoking command in '/root/Code/duan/Node/build/ros2_cpp': HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/build/ros2_cpp -- -j2 -l2
-[0.063s] [35m[1mConsolidate compiler generated dependencies of target ros2_cpp_node[0m
-[0.088s] [100%] Built target ros2_cpp_node
-[0.110s] Invoked command in '/root/Code/duan/Node/build/ros2_cpp' returned '0': HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/build/ros2_cpp -- -j2 -l2

@@ -1,6 +1,0 @@
-/root/Code/duan/Node/build/CMakeFiles/ros2_cpp_node.dir
-/root/Code/duan/Node/build/CMakeFiles/uninstall.dir
-/root/Code/duan/Node/build/CMakeFiles/ros2_cpp_uninstall.dir
-/root/Code/duan/Node/build/CMakeFiles/test.dir
-/root/Code/duan/Node/build/CMakeFiles/edit_cache.dir
-/root/Code/duan/Node/build/CMakeFiles/rebuild_cache.dir

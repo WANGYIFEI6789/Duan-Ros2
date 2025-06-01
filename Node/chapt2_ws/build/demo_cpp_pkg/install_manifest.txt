@@ -1,0 +1,16 @@
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/lib/demo_cpp_pkg/cpp_node
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/ament_index/resource_index/package_run_dependencies/demo_cpp_pkg
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/ament_index/resource_index/parent_prefix_path/demo_cpp_pkg
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/ament_prefix_path.sh
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/ament_prefix_path.dsv
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/path.sh
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/path.dsv
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.bash
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.sh
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.zsh
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.dsv
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/package.dsv
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/ament_index/resource_index/packages/demo_cpp_pkg
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/cmake/demo_cpp_pkgConfig.cmake
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/cmake/demo_cpp_pkgConfig-version.cmake
+/root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/package.xml

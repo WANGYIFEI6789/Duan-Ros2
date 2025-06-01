@@ -1,4 +1,0 @@
-Invoking command in '/root/Code/duan/Node/build/ros2_cpp': HISTTIMEFORMAT=%F %T root /usr/bin/cmake /root/Code/duan/Node -DCMAKE_INSTALL_PREFIX=/root/Code/duan/Node/install/ros2_cpp
-Invoked command in '/root/Code/duan/Node/build/ros2_cpp' returned '0': HISTTIMEFORMAT=%F %T root /usr/bin/cmake /root/Code/duan/Node -DCMAKE_INSTALL_PREFIX=/root/Code/duan/Node/install/ros2_cpp
-Invoking command in '/root/Code/duan/Node/build/ros2_cpp': HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/build/ros2_cpp -- -j2 -l2
-Invoked command in '/root/Code/duan/Node/build/ros2_cpp' returned '0': HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/build/ros2_cpp -- -j2 -l2

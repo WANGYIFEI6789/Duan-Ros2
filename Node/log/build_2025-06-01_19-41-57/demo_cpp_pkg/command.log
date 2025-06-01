@@ -1,4 +1,0 @@
-Invoking command in '/root/Code/duan/Node/build/demo_cpp_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/build/demo_cpp_pkg -- -j2 -l2
-Invoked command in '/root/Code/duan/Node/build/demo_cpp_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/build/demo_cpp_pkg -- -j2 -l2
-Invoking command in '/root/Code/duan/Node/build/demo_cpp_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Node/build/demo_cpp_pkg
-Invoked command in '/root/Code/duan/Node/build/demo_cpp_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Node/build/demo_cpp_pkg

@@ -1,0 +1,23 @@
+[0.011s] Invoking command in '/root/Code/duan/Node/chapt2_ws/build/demo_cpp_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/chapt2_ws/build/demo_cpp_pkg -- -j2 -l2
+[0.048s] [35m[1mConsolidate compiler generated dependencies of target cpp_node[0m
+[0.079s] [100%] Built target cpp_node
+[0.090s] Invoked command in '/root/Code/duan/Node/chapt2_ws/build/demo_cpp_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/chapt2_ws/build/demo_cpp_pkg -- -j2 -l2
+[0.098s] Invoking command in '/root/Code/duan/Node/chapt2_ws/build/demo_cpp_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Node/chapt2_ws/build/demo_cpp_pkg
+[0.104s] -- Install configuration: ""
+[0.105s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/lib/demo_cpp_pkg/cpp_node
+[0.105s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/ament_index/resource_index/package_run_dependencies/demo_cpp_pkg
+[0.105s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/ament_index/resource_index/parent_prefix_path/demo_cpp_pkg
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/ament_prefix_path.sh
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/ament_prefix_path.dsv
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/path.sh
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/path.dsv
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.bash
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.sh
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.zsh
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.dsv
+[0.106s] -- Installing: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/package.dsv
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/ament_index/resource_index/packages/demo_cpp_pkg
+[0.106s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/cmake/demo_cpp_pkgConfig.cmake
+[0.107s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/cmake/demo_cpp_pkgConfig-version.cmake
+[0.107s] -- Up-to-date: /root/Code/duan/Node/chapt2_ws/install/demo_cpp_pkg/share/demo_cpp_pkg/package.xml
+[0.108s] Invoked command in '/root/Code/duan/Node/chapt2_ws/build/demo_cpp_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Node/chapt2_ws/build/demo_cpp_pkg

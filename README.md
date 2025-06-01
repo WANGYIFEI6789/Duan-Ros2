@@ -107,3 +107,40 @@ install(TARGETS cpp_node
 在使用功能包组织节点的时候，会自动生成一个package.xml文件，用于描述功能包的基本信息、依赖关系和构建要求，最好能进行一个声明
 最后，一个功能包的完整结构如下：
 ![功能包完整结构](./Image/4.png)
+# WorkSpace
+在工作空间下如果有多个功能包，但目前执行构建一个功能包，colcon会一次性全部构建完这个时候要怎么办呢？  
+功能包构建产生的临时文件和功能包在同一目录下，此时如果想新增功能包就会很混乱，这个时候又要怎么办呢？  
+所以接下来会介绍多功能包的最佳实践
+一个完整的机器人项目往往由多个不同的功能模块组成，所以就需要对多个功能包进行组合  
+ROS2开发者约定了Workspace--即工作空间这一概念  
+首先创建双重目录 -p 递归创建
+```bash
+mkdir -p chapt2_ws/src
+```
+将之前的功能包拷贝到工作空间下
+```bash
+mv demo_cpp_pkg/ chapt2_ws/src/
+```
+删除之前的临时文件
+```bash
+rm -rf build/ install/ log/
+```
+然后就可以cd到chapt2_ws目录下 执行colcon build
+```bash
+cd chapt2_ws
+colcon build
+```
+可以通过--help 以及 grep命令过滤查看colcon build都有什么使用方法
+```bash
+colcon build --help | grep select
+```
+只选用一个功能包
+```bash
+colcon build --packages-select demo_cpp_pkg
+```
+同时还可以在Workspace中决定功能包的构建顺序  
+可以在python功能包的package.xml中加上<depend>demo_cpp_pkg</depend>
+```xml
+<depend>rclpy</depend>
+<depend>demo_cpp_pkg</depend>
+```
