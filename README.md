@@ -1,3 +1,8 @@
+# 目录介绍
+Image文件夹存放的是后续在讲解中会用到的图片
+Node文件夹用来存放学习基础知识时编写的代码
+Topic文件夹是在学习topic通信时编写的代码
+duan-src是存放项目代码的文件夹
 # 运行小海龟
 我们学习每个编程语言的时候，第一次学都是会去打印hello world
 同理，学习ros2的时候会去打印小海龟
@@ -23,7 +28,7 @@ tips:不是通过点击小海龟界面来使它移动
 可以再打开一个终端，输入rqt，点击回车，会出现这样的界面
 ![topic通信](./Image/2.png)
 这里是两个节点，左边的节点表示小海龟模拟器的节点，右边的节点表示键盘的按键，看箭头可以发现右边节点向左边节点发送了一个topic提供数据，然后小海龟模拟器会做出一个反馈（响应）
-
+# CMakeList编写示例
 写一段CMakeLists的编写 默认情况下CMake会自动寻找系统中已安装的C++编译器
 ```CMakeLists
 # cmake需要的最小版本
@@ -55,3 +60,50 @@ ros2 node list
 ```bash
 ros2 node info /duan_node
 ```
+# 使用功能包组织C++节点
+ros2 pkg create 是ros2提供的用于创建功能包的命令
+demo_cpp_pkg 为要创建的功能包的名称(相当于是一个文件夹)
+--build-type ament_cmake 指定功能包的构建类型为ament_cmake
+在ros2中ament是构建系统，ament_cmake是基于CMake的构建方式
+--license Apache-2.0 指定功能包所采用的开源许可证为Apache-2.0
+这表明功能包代码遵循 Apache - 2.0 协议的相关规定，包括版权声明、许可使用条件等
+```bash
+ros2 pkg create demo_cpp_pkg --build-type ament_cmake --license Apache-2.0
+```
+通过上述命令创建功能包之后，会在功能包下面自动生成一个CMakeLists.txt文件，在编写完Cpp代码后，需要去里面手动修改一下，一般情况下添加如下代码并修改可执行文件的名称即可
+```CMakeLists
+find_package(rclcpp REQUIRED)
+add_executable(cpp_node src/cpp_node.cpp)
+# target_include_directories(cpp_node PUBLIC ${rclcpp_INCLUDE_DIRS})
+# target_link_libraries(cpp_node ${rclcpp_LIBRARIES})
+# 可以替换上述两行的方式  可以通过ament_cmake的构建方式进行简写
+ament_target_dependencies(cpp_node rclcpp)
+```
+也可以在功能包(demo_cpp_pkg)上一级目录下，通过colcon去构建
+![目录层级](./Image/3.png)
+```bash
+colcon build
+```
+colcon是ros2中推荐使用的构建工具，用于编译和管理工作空间中的多个功能包
+tips：ldd可以查看某个可执行文件依赖哪些库
+```bash
+ldd cpp_node
+```
+在通过功能包实现节点之后，通过执行命令
+```bash
+ros2 run demo_cpp_pkg cpp_node
+```
+上述命令生成的可执行文件会在build目录下对应的功能包中
+会发现出现问题 Package 'demo_cpp_pkg' not found  原因为：没有修改环境变量，需要执行下述命令通过脚本(export)帮我们修改环境变量
+```bash
+source install/setup.bash
+```
+再次执行会发现已经会报错 No executable found 是因为没有找到可执行文件 需要再去对应的CMakeLists.txt中添加如下代码 通过install命令 将可执行文件拷贝到install目录对应的功能包目录下
+```CMakeList
+install(TARGETS cpp_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+```
+在使用功能包组织节点的时候，会自动生成一个package.xml文件，用于描述功能包的基本信息、依赖关系和构建要求，最好能进行一个声明
+最后，一个功能包的完整结构如下：
+![功能包完整结构](./Image/4.png)

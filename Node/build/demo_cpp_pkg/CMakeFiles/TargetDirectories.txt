@@ -1,0 +1,10 @@
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/uninstall.dir
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/demo_cpp_pkg_uninstall.dir
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/cpp_node.dir
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/test.dir
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/edit_cache.dir
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/rebuild_cache.dir
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/list_install_components.dir
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/install.dir
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/install/local.dir
+/root/Code/duan/Node/build/demo_cpp_pkg/CMakeFiles/install/strip.dir

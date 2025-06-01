@@ -1,0 +1,46 @@
+[0.011s] Invoking command in '/root/Code/duan/Node/build/demo_cpp_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/build/demo_cpp_pkg -- -j2 -l2
+[0.035s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.162s] -- Found rclcpp: 16.0.12 (/opt/ros/humble/share/rclcpp/cmake)
+[0.191s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.194s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.200s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.210s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.223s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.255s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.256s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.363s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.414s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.485s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.486s] -- Configured cppcheck include dirs: 
+[0.486s] -- Configured cppcheck exclude dirs and/or files: 
+[0.488s] -- Added test 'lint_cmake' to check CMake code style
+[0.495s] -- Added test 'uncrustify' to check C / C++ code style
+[0.495s] -- Configured uncrustify additional arguments: 
+[0.496s] -- Added test 'xmllint' to check XML markup files
+[0.497s] -- Configuring done
+[0.519s] -- Generating done
+[0.523s] -- Build files have been written to: /root/Code/duan/Node/build/demo_cpp_pkg
+[0.552s] [35m[1mConsolidate compiler generated dependencies of target cpp_node[0m
+[0.576s] [ 50%] [32m[1mLinking CXX executable cpp_node[0m
+[0.735s] [100%] Built target cpp_node
+[0.757s] Invoked command in '/root/Code/duan/Node/build/demo_cpp_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Node/build/demo_cpp_pkg -- -j2 -l2
+[0.767s] Invoking command in '/root/Code/duan/Node/build/demo_cpp_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Node/build/demo_cpp_pkg
+[0.777s] -- Install configuration: ""
+[0.778s] -- Installing: /root/Code/duan/Node/install/demo_cpp_pkg/lib/demo_cpp_pkg/cpp_node
+[0.779s] -- Set runtime path of "/root/Code/duan/Node/install/demo_cpp_pkg/lib/demo_cpp_pkg/cpp_node" to ""
+[0.779s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/ament_index/resource_index/package_run_dependencies/demo_cpp_pkg
+[0.779s] -- Installing: /root/Code/duan/Node/install/demo_cpp_pkg/share/ament_index/resource_index/parent_prefix_path/demo_cpp_pkg
+[0.779s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/ament_prefix_path.sh
+[0.780s] -- Installing: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/ament_prefix_path.dsv
+[0.780s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/path.sh
+[0.780s] -- Installing: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/environment/path.dsv
+[0.781s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.bash
+[0.781s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.sh
+[0.781s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.zsh
+[0.781s] -- Installing: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/local_setup.dsv
+[0.781s] -- Installing: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/package.dsv
+[0.781s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/ament_index/resource_index/packages/demo_cpp_pkg
+[0.781s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/cmake/demo_cpp_pkgConfig.cmake
+[0.782s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/cmake/demo_cpp_pkgConfig-version.cmake
+[0.782s] -- Up-to-date: /root/Code/duan/Node/install/demo_cpp_pkg/share/demo_cpp_pkg/package.xml
+[0.785s] Invoked command in '/root/Code/duan/Node/build/demo_cpp_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Node/build/demo_cpp_pkg
