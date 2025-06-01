@@ -61,11 +61,11 @@ ros2 node list
 ros2 node info /duan_node
 ```
 # 使用功能包组织C++节点
-ros2 pkg create 是ros2提供的用于创建功能包的命令
-demo_cpp_pkg 为要创建的功能包的名称(相当于是一个文件夹)
---build-type ament_cmake 指定功能包的构建类型为ament_cmake
-在ros2中ament是构建系统，ament_cmake是基于CMake的构建方式
---license Apache-2.0 指定功能包所采用的开源许可证为Apache-2.0
+ros2 pkg create 是ros2提供的用于创建功能包的命令  
+demo_cpp_pkg 为要创建的功能包的名称(相当于是一个文件夹)  
+--build-type ament_cmake 指定功能包的构建类型为ament_cmake  
+在ros2中ament是构建系统，ament_cmake是基于CMake的构建方式  
+--license Apache-2.0 指定功能包所采用的开源许可证为Apache-2.0  
 这表明功能包代码遵循 Apache - 2.0 协议的相关规定，包括版权声明、许可使用条件等
 ```bash
 ros2 pkg create demo_cpp_pkg --build-type ament_cmake --license Apache-2.0
