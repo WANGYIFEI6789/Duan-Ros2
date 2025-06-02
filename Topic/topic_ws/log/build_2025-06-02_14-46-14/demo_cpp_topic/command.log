@@ -1,0 +1,2 @@
+Invoking command in '/root/Code/duan/Topic/topic_ws/build/demo_cpp_topic': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic -- -j2 -l2
+Invoked command in '/root/Code/duan/Topic/topic_ws/build/demo_cpp_topic' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic -- -j2 -l2

@@ -47,4 +47,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/learn_shared_ptr.dir/DependInfo.cmake"
   "CMakeFiles/learn_lambda.dir/DependInfo.cmake"
   "CMakeFiles/learn_functional.dir/DependInfo.cmake"
+  "CMakeFiles/learn_thread.dir/DependInfo.cmake"
   )

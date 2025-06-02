@@ -155,3 +155,246 @@ functional 函数包装器：在C++中有以下几种函数：
 2.成员函数
 3.Lambda函数  
 通过函数包装器可以实现统一的调用方法  
+多线程与回调函数示例  
+这里以下载小说为例，线程1下载(第一章) 线程1统计数字(第一章内容)  
+线程2下载(第二章) 线程2统计数字(第二章内容)  
+线程3下载(第三章) 线程3统计数字(第三章内容)  
+回调函数，回调回调，回头再调  
+这里先去下载一个httplib，下载存放位置为Cpp-YiFei/include/
+A C++11 single-file header-only cross platform HTTP/HTTPS library  
+意思是说  单一头文件就支持HTTP/HTTPS跨平台，为了支持下载功能
+```bash
+git clone https://gitee.com/ohhuo/cpp-httplib.git
+```
+在对应的CMakeLists.txt中包含incluide目录，完整的CMakeList如下
+```CMakeList
+cmake_minimum_required(VERSION 3.8)
+project(CppNew)
+
+# 包含include头文件目录
+include_directories(include)
+add_executable(learn_auto learn_auto.cpp)
+add_executable(learn_shared_ptr learn_shared_ptr.cpp)
+add_executable(learn_lambda learn_lambda.cpp)
+add_executable(learn_functional learn_functional.cpp)
+add_executable(learn_thread learn_thread.cpp)
+```
+使用到了std::bind   std::thread
+```C++
+// 用法：第一个为可执行的函数(如果为类成员函数，需要再后面再传一个this指针)
+// 后续的参数为占位符，代表需要用到几个参数，std::placeholder::_1,...
+std::bind(callable, agr1, arg2, ...);
+// callable为函数对象，后续的参数为该函数对象需要使用到的参数
+std::thread(callable, arg1, arg2, ...);
+// 避免线程阻塞，所以需要使用线程分离
+thread::detach();
+```
+# 话题通信介绍
+在话题通信这里会有四个关键点：发布者  订阅者  话题名称  话题类型  
+举个例子--海龟模拟器话题  
+![海龟模拟器话题](./Image/5.png)  
+可以看到对应的话题名称：话题类型  
+这里是一些常用的命令，可以去看话题名称，话题类型，对应的数据内容等  
+```bash
+# 查看节点订阅了哪些topic 发布了哪些topic
+ros2 run node info /turtlesim
+# 查看某个话题的数据内容
+ros2 topic echo /turtle1/pose
+# 查看一个话题信息 包括消息类型、发布者数量、订阅者数量等等
+ros2 topic info /turtle/cmd_vel -v
+# 查看某个消息接口的定义
+ros2 interface show geometry_msgs/msg/Twist
+# 发布话题
+ros2 topic pub /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 1.0}}"
+```
+```bash
+# 启动小海龟
+ros2 run turtlesim turtlesim_node
+# 发布一个话题
+ros2 topic pub /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 1.0}}"
+# 小海龟订阅了这个话题，所以会执行相关的命令
+```
+效果如下：  
+![发布topic](./Image/6.png)  
+接下来实现一个小demo，下载小说并通过话题间隔5s发布一行  
+核心问题：  
+问题1：怎么下载小说？request  
+问题2：怎么发布？确定名字和接口  
+问题3：怎么间隔5s发布？Timer定时器  
+代码放在Topic文件夹下，首先创建一个工作空间  
+```bash
+mkdir -p topic_ws/src
+# 在src下创建功能包
+cd topic_ws/src/
+# 添加依赖 & 添加证书
+# 需要依赖rclcpp 因为发送的为string类型 这个接口类型在example_interfaces中
+ros2 pkg create demo_cpp_topic --build-type ament_cmake --dependencies rclcpp example_interfaces --license Apache-2.0
+# 然后回到topic_ws目录下
+cd ..
+# 执行colcon build 这样一个完整的工作目录就有了
+colcon build
+```
+```bash
+# 查看example_interfaces接口类型
+ros2 interface list | grep example_interfaces
+# 查看example_interfaces/msg/String接口内容
+ros2 interface show example_interfaces/msg/String
+```
+启动http服务
+```bash
+# 在最外层的Topic目录下启动
+# 小说也放在Topic目录下 novel novel1 novel2 novel3
+python3 -m http.server
+```
+```C++
+// 小说发布节点
+#include <rclcpp/rclcpp.hpp>
+#include <cpp-httplib/httplib.h>  // 下载相关的头文件
+#include <std_msgs/msg/string.hpp>  // 消息接口的类型
+#include <queue>
+
+class NovelPubNode : public rclcpp::Node{
+private:
+    // 声明话题发布者指针
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr novel_publisher_;
+    // 声明定时器指针
+    rclcpp::TimerBase::SharedPtr timer_;
+    // 创建一个队列，用来存放下载小说的每一行
+    std::queue<std::string> mq_;
+    void timer_callback(){
+        std::string line;
+        // 创建topic发送的消息对象
+        std_msgs::msg::String message;
+        if(mq_.size() > 0){
+            // 发布消息
+            line = mq_.front(); 
+            mq_.pop();
+            message.data = line;
+            // 把message放入发布者中
+            novel_publisher_->publish(message);
+            RCLCPP_INFO(this->get_logger(), "发布了: '%s'", message.data.c_str());
+        }
+    }
+public:
+    NovelPubNode(const std::string& node_name) : Node(node_name){
+        RCLCPP_INFO(this->get_logger(), "%s, 启动！", node_name.c_str());
+        // 创建发布者
+        novel_publisher_ = this->create_publisher<std_msgs::msg::String>("novel", 10);
+        // 创建定时器，5s为周期，定时发布
+        timer_ = this->create_wall_timer(std::chrono::milliseconds(5000), std::bind(&NovelPubNode::timer_callback, this));
+    }
+
+    // 从服务器上下载小说内容
+    void download(const std::string& host, const std::string& path){
+        httplib::Client client(host);
+        auto response = client.Get(path);
+        if(response && response->status == 200){
+            std::string text = response->body;
+            std::cout << "下载完成：" << path << ":" << "下载大小：" << text.size() << std::endl;
+            // 按行分 放入队列
+            std::istringstream iss(text);
+            std::string line;
+            while(std::getline(iss, line)){
+                mq_.push(line);
+            }
+        }
+    }
+};
+
+int main(int argc, char** argv){
+    // 初始化rclcpp库
+    rclcpp::init(argc, argv);
+    // 创建节点实例
+    auto node = std::make_shared<NovelPubNode>("novel_pub");
+    // 下载小说
+    node->download("http://0.0.0.0:8000", "/novel.txt");
+    // 使节点进入自选状态，处理回调等
+    rclcpp::spin(node);
+    // 关闭rclcpp库
+    rclcpp::shutdown(); 
+    return 0;
+}
+```
+对应的CMakeLists.txt
+```CMakeLists
+cmake_minimum_required(VERSION 3.8)
+project(demo_cpp_topic)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+include_directories(include/demo_cpp_topic)
+find_package(std_msgs REQUIRED)
+find_package(example_interfaces REQUIRED)
+
+
+add_executable(novel_pub_node src/novel_pub_node.cc)
+ament_target_dependencies(novel_pub_node rclcpp std_msgs)
+
+install(TARGETS novel_pub_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  # the following line skips the linter which checks for copyrights
+  # comment the line when a copyright and license is added to all source files
+  set(ament_cmake_copyright_FOUND TRUE)
+  # the following line skips cpplint (only works in a git repo)
+  # comment the line when this package is in a git repo and when
+  # a copyright and license is added to all source files
+  set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()
+```
+对应的package.xml
+```xml
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>demo_cpp_topic</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="15829054506@163.com">root</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>example_interfaces</depend>
+  <depend>std_msgs</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+```
+```bash
+# 构建  在topic_ws目录下
+colcon build
+# 查看是否有这个topic的信息
+ros2 topic list
+# 查看topic发出的信息
+ros2 topic echo /novel
+```
+基于上述的小demo继续开发  
+订阅小说并逐行朗读  
+核心问题：  
+问题1：怎么订阅  
+问题2：用什么来朗读文本？  Espeak  
+问题3：小说来的快，读的太慢怎么办？队列  
+这里的订阅节点使用python去编写，因为我想通过espeakng库让小说读起来
+```bash
+sudo apt install python3-pip -y
+pip3 install espeakng
+sudo apt install espeak-ng
+```

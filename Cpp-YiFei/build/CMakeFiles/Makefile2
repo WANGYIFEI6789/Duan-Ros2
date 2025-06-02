@@ -67,6 +67,7 @@ all: CMakeFiles/learn_auto.dir/all
 all: CMakeFiles/learn_shared_ptr.dir/all
 all: CMakeFiles/learn_lambda.dir/all
 all: CMakeFiles/learn_functional.dir/all
+all: CMakeFiles/learn_thread.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -78,6 +79,7 @@ clean: CMakeFiles/learn_auto.dir/clean
 clean: CMakeFiles/learn_shared_ptr.dir/clean
 clean: CMakeFiles/learn_lambda.dir/clean
 clean: CMakeFiles/learn_functional.dir/clean
+clean: CMakeFiles/learn_thread.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -183,6 +185,32 @@ learn_functional: CMakeFiles/learn_functional.dir/rule
 CMakeFiles/learn_functional.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_functional.dir/build.make CMakeFiles/learn_functional.dir/clean
 .PHONY : CMakeFiles/learn_functional.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/learn_thread.dir
+
+# All Build rule for target.
+CMakeFiles/learn_thread.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_thread.dir/build.make CMakeFiles/learn_thread.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_thread.dir/build.make CMakeFiles/learn_thread.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/root/Code/duan/Cpp-YiFei/build/CMakeFiles --progress-num=9,10 "Built target learn_thread"
+.PHONY : CMakeFiles/learn_thread.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/learn_thread.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Cpp-YiFei/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/learn_thread.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Cpp-YiFei/build/CMakeFiles 0
+.PHONY : CMakeFiles/learn_thread.dir/rule
+
+# Convenience name for target.
+learn_thread: CMakeFiles/learn_thread.dir/rule
+.PHONY : learn_thread
+
+# clean rule for target.
+CMakeFiles/learn_thread.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_thread.dir/build.make CMakeFiles/learn_thread.dir/clean
+.PHONY : CMakeFiles/learn_thread.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

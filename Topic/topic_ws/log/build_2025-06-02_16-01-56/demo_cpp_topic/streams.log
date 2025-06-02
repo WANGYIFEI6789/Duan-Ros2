@@ -1,0 +1,50 @@
+[0.010s] Invoking command in '/root/Code/duan/Topic/topic_ws/build/demo_cpp_topic': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic -- -j2 -l2
+[0.034s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.156s] -- Found rclcpp: 16.0.12 (/opt/ros/humble/share/rclcpp/cmake)
+[0.184s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.187s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.193s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.203s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.216s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.249s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.250s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.354s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.402s] -- Found example_interfaces: 0.9.3 (/opt/ros/humble/share/example_interfaces/cmake)
+[0.439s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.511s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.511s] -- Configured cppcheck include dirs: /root/Code/duan/Topic/topic_ws/src/demo_cpp_topic/include/demo_cpp_topic
+[0.511s] -- Configured cppcheck exclude dirs and/or files: 
+[0.513s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.515s] -- Added test 'lint_cmake' to check CMake code style
+[0.516s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.525s] -- Added test 'uncrustify' to check C / C++ code style
+[0.525s] -- Configured uncrustify additional arguments: 
+[0.527s] -- Added test 'xmllint' to check XML markup files
+[0.527s] -- Configuring done
+[0.538s] -- Generating done
+[0.543s] -- Build files have been written to: /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic
+[0.568s] [35m[1mConsolidate compiler generated dependencies of target novel_pub_node[0m
+[0.591s] [ 50%] [32mBuilding CXX object CMakeFiles/novel_pub_node.dir/src/novel_pub_node.cc.o[0m
+[9.748s] [100%] [32m[1mLinking CXX executable novel_pub_node[0m
+[10.220s] [100%] Built target novel_pub_node
+[10.238s] Invoked command in '/root/Code/duan/Topic/topic_ws/build/demo_cpp_topic' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic -- -j2 -l2
+[10.253s] Invoking command in '/root/Code/duan/Topic/topic_ws/build/demo_cpp_topic': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic
+[10.263s] -- Install configuration: ""
+[10.267s] -- Installing: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/lib/demo_cpp_topic/novel_pub_node
+[10.271s] -- Set runtime path of "/root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/lib/demo_cpp_topic/novel_pub_node" to ""
+[10.273s] -- Installing: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/ament_index/resource_index/package_run_dependencies/demo_cpp_topic
+[10.275s] -- Up-to-date: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/ament_index/resource_index/parent_prefix_path/demo_cpp_topic
+[10.278s] -- Up-to-date: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/environment/ament_prefix_path.sh
+[10.278s] -- Installing: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/environment/ament_prefix_path.dsv
+[10.279s] -- Up-to-date: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/environment/path.sh
+[10.279s] -- Installing: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/environment/path.dsv
+[10.280s] -- Up-to-date: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/local_setup.bash
+[10.280s] -- Up-to-date: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/local_setup.sh
+[10.280s] -- Up-to-date: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/local_setup.zsh
+[10.280s] -- Installing: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/local_setup.dsv
+[10.281s] -- Installing: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/package.dsv
+[10.282s] -- Up-to-date: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/ament_index/resource_index/packages/demo_cpp_topic
+[10.282s] -- Up-to-date: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/cmake/demo_cpp_topicConfig.cmake
+[10.282s] -- Up-to-date: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/cmake/demo_cpp_topicConfig-version.cmake
+[10.283s] -- Installing: /root/Code/duan/Topic/topic_ws/install/demo_cpp_topic/share/demo_cpp_topic/package.xml
+[10.287s] Invoked command in '/root/Code/duan/Topic/topic_ws/build/demo_cpp_topic' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic

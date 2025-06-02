@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/root/Code/duan/Cpp-YiFei/include
 
 CXX_FLAGS = 
 

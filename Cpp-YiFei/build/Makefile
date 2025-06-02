@@ -168,6 +168,19 @@ learn_functional/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_functional.dir/build.make CMakeFiles/learn_functional.dir/build
 .PHONY : learn_functional/fast
 
+#=============================================================================
+# Target rules for targets named learn_thread
+
+# Build rule for target.
+learn_thread: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 learn_thread
+.PHONY : learn_thread
+
+# fast build rule for target.
+learn_thread/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_thread.dir/build.make CMakeFiles/learn_thread.dir/build
+.PHONY : learn_thread/fast
+
 learn_auto.o: learn_auto.cpp.o
 .PHONY : learn_auto.o
 
@@ -264,6 +277,30 @@ learn_shared_ptr.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_shared_ptr.dir/build.make CMakeFiles/learn_shared_ptr.dir/learn_shared_ptr.cpp.s
 .PHONY : learn_shared_ptr.cpp.s
 
+learn_thread.o: learn_thread.cpp.o
+.PHONY : learn_thread.o
+
+# target to build an object file
+learn_thread.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_thread.dir/build.make CMakeFiles/learn_thread.dir/learn_thread.cpp.o
+.PHONY : learn_thread.cpp.o
+
+learn_thread.i: learn_thread.cpp.i
+.PHONY : learn_thread.i
+
+# target to preprocess a source file
+learn_thread.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_thread.dir/build.make CMakeFiles/learn_thread.dir/learn_thread.cpp.i
+.PHONY : learn_thread.cpp.i
+
+learn_thread.s: learn_thread.cpp.s
+.PHONY : learn_thread.s
+
+# target to generate assembly for a file
+learn_thread.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn_thread.dir/build.make CMakeFiles/learn_thread.dir/learn_thread.cpp.s
+.PHONY : learn_thread.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -276,6 +313,7 @@ help:
 	@echo "... learn_functional"
 	@echo "... learn_lambda"
 	@echo "... learn_shared_ptr"
+	@echo "... learn_thread"
 	@echo "... learn_auto.o"
 	@echo "... learn_auto.i"
 	@echo "... learn_auto.s"
@@ -288,6 +326,9 @@ help:
 	@echo "... learn_shared_ptr.o"
 	@echo "... learn_shared_ptr.i"
 	@echo "... learn_shared_ptr.s"
+	@echo "... learn_thread.o"
+	@echo "... learn_thread.i"
+	@echo "... learn_thread.s"
 .PHONY : help
 
 
