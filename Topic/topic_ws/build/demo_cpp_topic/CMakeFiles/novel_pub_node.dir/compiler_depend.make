@@ -773,8 +773,24 @@ CMakeFiles/novel_pub_node.dir/src/novel_pub_node.cc.o: /root/Code/duan/Topic/top
   /usr/include/asm-generic/int-ll64.h \
   /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h
+  /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
+  /opt/ros/humble/include/std_msgs/std_msgs/msg/string.hpp \
+  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__struct.hpp \
+  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__builder.hpp \
+  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__traits.hpp \
+  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__type_support.hpp \
+  /opt/ros/humble/include/std_msgs/std_msgs/msg/rosidl_generator_cpp__visibility_control.hpp \
+  /usr/include/c++/11/queue \
+  /usr/include/c++/11/bits/stl_queue.h
 
+
+/usr/include/c++/11/bits/stl_queue.h:
+
+/usr/include/c++/11/queue:
+
+/opt/ros/humble/include/std_msgs/std_msgs/msg/rosidl_generator_cpp__visibility_control.hpp:
+
+/opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__type_support.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
 
@@ -809,6 +825,8 @@ CMakeFiles/novel_pub_node.dir/src/novel_pub_node.cc.o: /root/Code/duan/Topic/top
 /usr/include/c++/11/regex:
 
 /usr/include/c++/11/bits/random.h:
+
+/opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__traits.hpp:
 
 /usr/include/c++/11/random:
 
@@ -859,6 +877,8 @@ CMakeFiles/novel_pub_node.dir/src/novel_pub_node.cc.o: /root/Code/duan/Topic/top
 /usr/include/asm-generic/posix_types.h:
 
 /usr/include/x86_64-linux-gnu/asm/posix_types_64.h:
+
+/opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__struct.hpp:
 
 /usr/include/x86_64-linux-gnu/asm/posix_types.h:
 
@@ -1400,6 +1420,8 @@ CMakeFiles/novel_pub_node.dir/src/novel_pub_node.cc.o: /root/Code/duan/Topic/top
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h:
 
+/opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__builder.hpp:
+
 /opt/ros/humble/include/statistics_msgs/statistics_msgs/msg/metrics_message.hpp:
 
 /opt/ros/humble/include/rclcpp/rclcpp/detail/rmw_implementation_specific_publisher_payload.hpp:
@@ -1883,6 +1905,8 @@ CMakeFiles/novel_pub_node.dir/src/novel_pub_node.cc.o: /root/Code/duan/Topic/top
 /opt/ros/humble/include/rmw/rmw/visibility_control.h:
 
 /opt/ros/humble/include/rmw/rmw/macros.h:
+
+/opt/ros/humble/include/std_msgs/std_msgs/msg/string.hpp:
 
 /opt/ros/humble/include/libstatistics_collector/libstatistics_collector/moving_average_statistics/moving_average.hpp:
 

@@ -398,3 +398,8 @@ sudo apt install python3-pip -y
 pip3 install espeakng
 sudo apt install espeak-ng
 ```
+我将订阅节点放在topic_2_ws/src/目录下  
+```bash
+ros2 pkg create demo_python_topic --build-type ament_python --dependencies rclpy example_interfaces --license Apache-2.0
+# 接下来在Topic/topic_2_ws/src/demo_python_topic/ 创建novel_sub_node.py
+```

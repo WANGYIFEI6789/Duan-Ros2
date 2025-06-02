@@ -1,0 +1,25 @@
+[29.855s] Invoking command in '/root/Code/duan/Topic/topic_2_ws/src/demo_python_topic': HISTTIMEFORMAT=%F %T root PYTHONPATH=/root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/demo_python_topic build --build-base /root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/build install --record /root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/install.log --single-version-externally-managed install_data
+[36.763s] running egg_info
+[36.763s] writing ../../build/demo_python_topic/demo_python_topic.egg-info/PKG-INFO
+[36.763s] writing dependency_links to ../../build/demo_python_topic/demo_python_topic.egg-info/dependency_links.txt
+[36.763s] writing entry points to ../../build/demo_python_topic/demo_python_topic.egg-info/entry_points.txt
+[36.766s] writing requirements to ../../build/demo_python_topic/demo_python_topic.egg-info/requires.txt
+[36.767s] writing top-level names to ../../build/demo_python_topic/demo_python_topic.egg-info/top_level.txt
+[36.785s] reading manifest file '../../build/demo_python_topic/demo_python_topic.egg-info/SOURCES.txt'
+[36.786s] adding license file 'LICENSE'
+[36.787s] writing manifest file '../../build/demo_python_topic/demo_python_topic.egg-info/SOURCES.txt'
+[36.787s] running build
+[36.788s] running build_py
+[36.789s] copying demo_python_topic/novel_sub_node.py -> /root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/build/lib/demo_python_topic
+[36.790s] running install
+[36.791s] running install_lib
+[36.796s] copying /root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/build/lib/demo_python_topic/novel_sub_node.py -> /root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages/demo_python_topic
+[36.808s] byte-compiling /root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages/demo_python_topic/novel_sub_node.py to novel_sub_node.cpython-310.pyc
+[36.818s] running install_data
+[36.818s] running install_egg_info
+[36.818s] removing '/root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages/demo_python_topic-0.0.0-py3.10.egg-info' (and everything under it)
+[36.818s] Copying ../../build/demo_python_topic/demo_python_topic.egg-info to /root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages/demo_python_topic-0.0.0-py3.10.egg-info
+[36.822s] running install_scripts
+[37.044s] Installing novel_sub_node script to /root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/demo_python_topic
+[37.047s] writing list of installed files to '/root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/install.log'
+[37.763s] Invoked command in '/root/Code/duan/Topic/topic_2_ws/src/demo_python_topic' returned '0': HISTTIMEFORMAT=%F %T root PYTHONPATH=/root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/demo_python_topic build --build-base /root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/build install --record /root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/install.log --single-version-externally-managed install_data

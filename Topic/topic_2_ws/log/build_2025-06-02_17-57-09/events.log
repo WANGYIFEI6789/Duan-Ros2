@@ -1,0 +1,183 @@
+[0.000000] (-) TimerEvent: {}
+[0.003201] (demo_python_topic) JobQueued: {'identifier': 'demo_python_topic', 'dependencies': OrderedDict()}
+[0.003238] (demo_python_topic) JobStarted: {'identifier': 'demo_python_topic'}
+[0.099799] (-) TimerEvent: {}
+[0.200621] (-) TimerEvent: {}
+[0.300939] (-) TimerEvent: {}
+[0.401228] (-) TimerEvent: {}
+[0.501529] (-) TimerEvent: {}
+[0.601891] (-) TimerEvent: {}
+[0.702188] (-) TimerEvent: {}
+[0.802472] (-) TimerEvent: {}
+[0.908997] (-) TimerEvent: {}
+[1.010137] (-) TimerEvent: {}
+[1.113630] (-) TimerEvent: {}
+[1.219982] (-) TimerEvent: {}
+[1.783996] (-) TimerEvent: {}
+[1.895822] (-) TimerEvent: {}
+[2.004615] (-) TimerEvent: {}
+[2.106570] (-) TimerEvent: {}
+[2.206886] (-) TimerEvent: {}
+[2.307189] (-) TimerEvent: {}
+[2.407492] (-) TimerEvent: {}
+[2.507805] (-) TimerEvent: {}
+[2.608112] (-) TimerEvent: {}
+[2.708456] (-) TimerEvent: {}
+[2.809362] (-) TimerEvent: {}
+[2.916451] (-) TimerEvent: {}
+[3.030141] (-) TimerEvent: {}
+[3.679900] (-) TimerEvent: {}
+[3.785203] (-) TimerEvent: {}
+[3.898003] (-) TimerEvent: {}
+[4.012753] (-) TimerEvent: {}
+[4.680078] (-) TimerEvent: {}
+[4.789041] (-) TimerEvent: {}
+[4.895830] (-) TimerEvent: {}
+[5.005438] (-) TimerEvent: {}
+[5.798914] (-) TimerEvent: {}
+[5.920717] (-) TimerEvent: {}
+[6.027764] (-) TimerEvent: {}
+[6.128638] (-) TimerEvent: {}
+[6.779085] (-) TimerEvent: {}
+[6.879328] (-) TimerEvent: {}
+[6.979629] (-) TimerEvent: {}
+[7.080260] (-) TimerEvent: {}
+[7.185624] (-) TimerEvent: {}
+[7.285922] (-) TimerEvent: {}
+[7.386238] (-) TimerEvent: {}
+[7.486561] (-) TimerEvent: {}
+[7.586879] (-) TimerEvent: {}
+[7.687173] (-) TimerEvent: {}
+[7.793888] (-) TimerEvent: {}
+[7.903163] (-) TimerEvent: {}
+[8.010092] (-) TimerEvent: {}
+[8.112415] (-) TimerEvent: {}
+[8.795552] (-) TimerEvent: {}
+[8.921463] (-) TimerEvent: {}
+[9.030395] (-) TimerEvent: {}
+[9.784373] (-) TimerEvent: {}
+[9.908366] (-) TimerEvent: {}
+[10.029714] (-) TimerEvent: {}
+[10.137271] (-) TimerEvent: {}
+[10.237606] (-) TimerEvent: {}
+[10.337914] (-) TimerEvent: {}
+[10.438242] (-) TimerEvent: {}
+[10.538559] (-) TimerEvent: {}
+[10.638860] (-) TimerEvent: {}
+[10.739180] (-) TimerEvent: {}
+[10.840615] (-) TimerEvent: {}
+[10.947307] (-) TimerEvent: {}
+[11.056063] (-) TimerEvent: {}
+[11.161442] (-) TimerEvent: {}
+[11.261746] (-) TimerEvent: {}
+[11.362049] (-) TimerEvent: {}
+[11.462354] (-) TimerEvent: {}
+[11.562652] (-) TimerEvent: {}
+[11.662962] (-) TimerEvent: {}
+[11.770528] (-) TimerEvent: {}
+[11.892816] (-) TimerEvent: {}
+[12.005812] (-) TimerEvent: {}
+[12.784393] (-) TimerEvent: {}
+[12.916883] (-) TimerEvent: {}
+[13.680354] (-) TimerEvent: {}
+[13.795026] (-) TimerEvent: {}
+[13.932524] (-) TimerEvent: {}
+[14.789199] (-) TimerEvent: {}
+[14.906664] (-) TimerEvent: {}
+[15.803469] (-) TimerEvent: {}
+[16.681658] (-) TimerEvent: {}
+[16.793055] (-) TimerEvent: {}
+[17.801266] (-) TimerEvent: {}
+[18.683407] (-) TimerEvent: {}
+[18.797663] (-) TimerEvent: {}
+[18.919031] (-) TimerEvent: {}
+[19.795379] (-) TimerEvent: {}
+[20.684474] (-) TimerEvent: {}
+[20.806274] (-) TimerEvent: {}
+[21.683558] (-) TimerEvent: {}
+[21.801446] (-) TimerEvent: {}
+[22.681539] (-) TimerEvent: {}
+[22.799027] (-) TimerEvent: {}
+[22.915300] (-) TimerEvent: {}
+[23.795929] (-) TimerEvent: {}
+[24.684165] (-) TimerEvent: {}
+[24.804553] (-) TimerEvent: {}
+[25.682203] (-) TimerEvent: {}
+[25.802828] (-) TimerEvent: {}
+[26.682134] (-) TimerEvent: {}
+[26.807019] (-) TimerEvent: {}
+[28.682842] (-) TimerEvent: {}
+[28.796425] (-) TimerEvent: {}
+[29.796791] (-) TimerEvent: {}
+[29.855732] (demo_python_topic) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/demo_python_topic', 'build', '--build-base', '/root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/build', 'install', '--record', '/root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/root/Code/duan/Topic/topic_2_ws/src/demo_python_topic', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'HISTTIMEFORMAT': '%F %T root', 'USER': 'root', 'SSH_CLIENT': '112.80.12.161 15426 22', 'XDG_SESSION_TYPE': 'tty', 'GIT_ASKPASS': '/root/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/extensions/git/dist/askpass.sh', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'BROWSER': '/root/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/helpers/browser.sh', 'MOTD_SHOWN': 'pam', 'HOME': '/root', 'OLDPWD': '/root/Code/duan/Topic', 'TERM_PROGRAM_VERSION': '1.68.1', 'VSCODE_IPC_HOOK_CLI': '/run/user/0/vscode-ipc-9eb3e887-e81d-4b5d-bfb9-57d632e6f38c.sock', 'ROS_PYTHON_VERSION': '3', 'VSCODE_GIT_ASKPASS_MAIN': '/root/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/root/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/0/bus', 'COLORTERM': 'truecolor', 'COLCON_PREFIX_PATH': '/root/Code/duan/Topic/topic_2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'root', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '76', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/root/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/0', 'HISTSIZE': '1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/0/vscode-git-598ce79132.sock', 'TERM_PROGRAM': 'vscode', 'AMENT_PREFIX_PATH': '/root/Code/duan/Topic/topic_2_ws/install/demo_python_topic:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'PWD': '/root/Code/duan/Topic/topic_2_ws/build/demo_python_topic', 'SSH_CONNECTION': '112.80.12.161 15426 172.31.7.6 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages:/root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[30.679843] (-) TimerEvent: {}
+[30.787595] (-) TimerEvent: {}
+[30.888570] (-) TimerEvent: {}
+[30.991204] (-) TimerEvent: {}
+[31.093453] (-) TimerEvent: {}
+[31.196901] (-) TimerEvent: {}
+[31.299445] (-) TimerEvent: {}
+[31.399769] (-) TimerEvent: {}
+[31.500120] (-) TimerEvent: {}
+[31.600422] (-) TimerEvent: {}
+[31.704385] (-) TimerEvent: {}
+[31.805750] (-) TimerEvent: {}
+[31.925964] (-) TimerEvent: {}
+[32.680306] (-) TimerEvent: {}
+[32.793348] (-) TimerEvent: {}
+[32.905220] (-) TimerEvent: {}
+[33.015211] (-) TimerEvent: {}
+[33.120951] (-) TimerEvent: {}
+[33.680186] (-) TimerEvent: {}
+[33.781863] (-) TimerEvent: {}
+[33.895912] (-) TimerEvent: {}
+[34.028707] (-) TimerEvent: {}
+[34.785356] (-) TimerEvent: {}
+[34.911772] (-) TimerEvent: {}
+[35.026905] (-) TimerEvent: {}
+[35.784238] (-) TimerEvent: {}
+[35.898367] (-) TimerEvent: {}
+[36.017869] (-) TimerEvent: {}
+[36.127992] (-) TimerEvent: {}
+[36.228289] (-) TimerEvent: {}
+[36.328569] (-) TimerEvent: {}
+[36.428857] (-) TimerEvent: {}
+[36.529178] (-) TimerEvent: {}
+[36.629494] (-) TimerEvent: {}
+[36.729788] (-) TimerEvent: {}
+[36.762067] (demo_python_topic) StdoutLine: {'line': b'running egg_info\n'}
+[36.766533] (demo_python_topic) StdoutLine: {'line': b'writing ../../build/demo_python_topic/demo_python_topic.egg-info/PKG-INFO\n'}
+[36.766627] (demo_python_topic) StdoutLine: {'line': b'writing dependency_links to ../../build/demo_python_topic/demo_python_topic.egg-info/dependency_links.txt\n'}
+[36.766699] (demo_python_topic) StdoutLine: {'line': b'writing entry points to ../../build/demo_python_topic/demo_python_topic.egg-info/entry_points.txt\n'}
+[36.769590] (demo_python_topic) StdoutLine: {'line': b'writing requirements to ../../build/demo_python_topic/demo_python_topic.egg-info/requires.txt\n'}
+[36.770134] (demo_python_topic) StdoutLine: {'line': b'writing top-level names to ../../build/demo_python_topic/demo_python_topic.egg-info/top_level.txt\n'}
+[36.787218] (demo_python_topic) StdoutLine: {'line': b"reading manifest file '../../build/demo_python_topic/demo_python_topic.egg-info/SOURCES.txt'\n"}
+[36.789315] (demo_python_topic) StdoutLine: {'line': b"adding license file 'LICENSE'\n"}
+[36.790329] (demo_python_topic) StdoutLine: {'line': b"writing manifest file '../../build/demo_python_topic/demo_python_topic.egg-info/SOURCES.txt'\n"}
+[36.790596] (demo_python_topic) StdoutLine: {'line': b'running build\n'}
+[36.790756] (demo_python_topic) StdoutLine: {'line': b'running build_py\n'}
+[36.792259] (demo_python_topic) StdoutLine: {'line': b'copying demo_python_topic/novel_sub_node.py -> /root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/build/lib/demo_python_topic\n'}
+[36.793271] (demo_python_topic) StdoutLine: {'line': b'running install\n'}
+[36.793848] (demo_python_topic) StdoutLine: {'line': b'running install_lib\n'}
+[36.798910] (demo_python_topic) StdoutLine: {'line': b'copying /root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/build/lib/demo_python_topic/novel_sub_node.py -> /root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages/demo_python_topic\n'}
+[36.811339] (demo_python_topic) StdoutLine: {'line': b'byte-compiling /root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages/demo_python_topic/novel_sub_node.py to novel_sub_node.cpython-310.pyc\n'}
+[36.820779] (demo_python_topic) StdoutLine: {'line': b'running install_data\n'}
+[36.820885] (demo_python_topic) StdoutLine: {'line': b'running install_egg_info\n'}
+[36.820955] (demo_python_topic) StdoutLine: {'line': b"removing '/root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages/demo_python_topic-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[36.821345] (demo_python_topic) StdoutLine: {'line': b'Copying ../../build/demo_python_topic/demo_python_topic.egg-info to /root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/python3.10/site-packages/demo_python_topic-0.0.0-py3.10.egg-info\n'}
+[36.824996] (demo_python_topic) StdoutLine: {'line': b'running install_scripts\n'}
+[36.829841] (-) TimerEvent: {}
+[36.930931] (-) TimerEvent: {}
+[37.035639] (-) TimerEvent: {}
+[37.046823] (demo_python_topic) StdoutLine: {'line': b'Installing novel_sub_node script to /root/Code/duan/Topic/topic_2_ws/install/demo_python_topic/lib/demo_python_topic\n'}
+[37.050228] (demo_python_topic) StdoutLine: {'line': b"writing list of installed files to '/root/Code/duan/Topic/topic_2_ws/build/demo_python_topic/install.log'\n"}
+[37.135799] (-) TimerEvent: {}
+[37.236154] (-) TimerEvent: {}
+[37.336498] (-) TimerEvent: {}
+[37.436797] (-) TimerEvent: {}
+[37.537093] (-) TimerEvent: {}
+[37.637445] (-) TimerEvent: {}
+[37.747153] (-) TimerEvent: {}
+[37.764480] (demo_python_topic) CommandEnded: {'returncode': 0}
+[37.810128] (demo_python_topic) JobEnded: {'identifier': 'demo_python_topic', 'rc': 0}
+[37.811079] (-) EventReactorShutdown: {}
