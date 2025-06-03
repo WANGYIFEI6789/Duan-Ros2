@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/Code/duan/Topic/topic_ws/src/demo_cpp_topic
+CMAKE_SOURCE_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_ws/src/demo_cpp_topic
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic
+CMAKE_BINARY_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_cpp_topic
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,9 +142,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic/CMakeFiles /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_cpp_topic/CMakeFiles /home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_cpp_topic//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Topic/topic_ws/build/demo_cpp_topic/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_cpp_topic/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

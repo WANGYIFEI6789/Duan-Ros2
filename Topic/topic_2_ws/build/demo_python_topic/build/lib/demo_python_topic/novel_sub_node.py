@@ -30,7 +30,7 @@ class NovelSubNode(Node):
         # 生成一个对象
         speaker = espeakng.Speaker()
         # 设置一下属性 zh表示中文
-        speaker.voice = 'zh'
+        speaker.voice = 'zh-yue'
         
         while rclpy.ok(): # 检测当前ros上下文是否ok
             if self.novels_queue_.qsize() > 0:
