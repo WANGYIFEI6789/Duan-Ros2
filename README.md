@@ -459,8 +459,13 @@ def main():
 ```
 注意需要先运行服务器、再启动订阅节点、最后运行发布节点  
 ```bash
+# 运行服务器
 python3 -m http.server
 # 分别在topic_ws 和 tpoic_2_ws目录下
-ros2 run demo_cpp_topic novel_pub_node
+# 在启动节点前 先source一下环境变量
+source install/setup.bash
+# 启动订阅节点
 ros2 run demo_python_topic novel_sub_node
+# 启动发布节点
+ros2 run demo_cpp_topic novel_pub_node
 ```
