@@ -1,0 +1,25 @@
+[0.011s] Invoking command in '/home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_turtle_topic': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_turtle_topic -- -j8 -l8
+[0.060s] [ 50%] [32mBuilding CXX object CMakeFiles/turtle_circle.dir/src/turtle_circle.cpp.o[0m
+[3.746s] [100%] [32m[1mLinking CXX executable turtle_circle[0m
+[3.907s] [100%] Built target turtle_circle
+[3.920s] Invoked command in '/home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_turtle_topic' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_turtle_topic -- -j8 -l8
+[3.920s] Invoking command in '/home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_turtle_topic': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_turtle_topic
+[3.924s] -- Install configuration: ""
+[3.924s] -- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/lib/demo_turtle_topic/turtle_circle
+[3.928s] -- Set runtime path of "/home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/lib/demo_turtle_topic/turtle_circle" to ""
+[3.928s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/ament_index/resource_index/package_run_dependencies/demo_turtle_topic
+[3.928s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/ament_index/resource_index/parent_prefix_path/demo_turtle_topic
+[3.928s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/environment/ament_prefix_path.sh
+[3.928s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/environment/ament_prefix_path.dsv
+[3.928s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/environment/path.sh
+[3.928s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/environment/path.dsv
+[3.928s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/local_setup.bash
+[3.929s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/local_setup.sh
+[3.929s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/local_setup.zsh
+[3.929s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/local_setup.dsv
+[3.929s] -- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/package.dsv
+[3.929s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/ament_index/resource_index/packages/demo_turtle_topic
+[3.929s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/cmake/demo_turtle_topicConfig.cmake
+[3.929s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/cmake/demo_turtle_topicConfig-version.cmake
+[3.929s] -- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_ws/install/demo_turtle_topic/share/demo_turtle_topic/package.xml
+[3.930s] Invoked command in '/home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_turtle_topic' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/duan/Code/Duan-Ros2/Topic/topic_ws/build/demo_turtle_topic

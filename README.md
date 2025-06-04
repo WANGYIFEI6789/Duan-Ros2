@@ -469,3 +469,162 @@ ros2 run demo_python_topic novel_sub_node
 # 启动发布节点
 ros2 run demo_cpp_topic novel_pub_node
 ```
+再来一个需求：控制小海龟模拟器中的小海龟转指定半径的圆  
+核心问题：  
+1.小海龟凭什么听我的？ 话题  
+2.前进后退我知道，画圆？线速度/角速度=半径 v = w * r  
+3.发一下就停了，如何循环发？定时器  
+首先需要启动一下小海龟的节点，并且查看有哪些topic  
+```bash
+# 启动节点
+ros2 run turtlesim turtlesim_node
+# 查看有哪些topic
+ros2 topic list -t
+# 在上述的topic中，我们会用到下面这几个 
+# []里的是需要的头文件，后续在创建功能包的时候需要加在依赖里
+# /turtle1/cmd_vel  [geometry_msgs/msg/Twist]
+# /turtle1/color_sensor  [turtlesim/msg/Color]
+# /turtle1/pose  [turtlesim/msg/Pose]
+# 在topic_ws文件夹下创建功能包
+ros2 pkg create demo_turtle_topic --build-type ament_cmake --dependencies rclcpp geometry_msgs turtlesim --license Apache-2.0
+```
+```C++
+// 发布控制消息的节点
+#include "rclcpp/rclcpp.hpp"
+#include "geometry_msgs/msg/twist.hpp"  // 需要控制小海龟 所以需要这个头文件
+#include <chrono>
+
+using namespace std::chrono_literals;  // 对秒数进行自动转换
+
+class TurtleCircleNode : public rclcpp::Node{
+private:
+    // 定时器  持续去发送信息
+    rclcpp::TimerBase::SharedPtr timer_;
+    // 模板类的智能指针   发布者的智能指针  后续需要赋值
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_;
+public:
+    // explicit关键字 强制要求显式调用构造函数进行对象初始化
+    explicit TurtleCircleNode(const std::string& node_name) : Node(node_name){
+        publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/turtle/cmd_vel", 10);
+        // 我这里采用匿名函数作为回调函数
+        timer_ = this->create_wall_timer(1000ms, [&](){
+            // 创建消息
+            auto msg = geometry_msgs::msg::Twist();
+            // 设置消息内容 线速度
+            msg.linear.x = 1.0;
+            msg.linear.z = 0.5;
+            // 发布消息
+            publisher_->publish(msg);
+        });
+    }
+};
+
+int main(int argc, char** argv){
+    rclcpp::init(argc, argv);
+    auto node = std::make_shared<TurtleCircleNode>("turtle_circle");
+    // 运行节点
+    rclcpp::spin(node);
+    rclcpp::shutdown();
+    return 0;
+}
+```
+```bash
+colcon build
+source install/setup.bash
+ros2 run demo_turtle_topic turtle_circle
+# 再开启一个终端 查看节点 topic 以及topic内容
+ros2 node list
+ros2 node info /turtle_circle
+# 查看发布内容
+ros2 topic echo /turtle1/cmd_vel
+# 再次运行小海龟 发现小海龟会画圆
+ros2 run turtlesim turtlesim_node
+```
+订阅pose实现闭环控制  
+需求：告诉小海龟到指定位置，自己滚过去  
+核心问题：  
+1.小海龟凭什么听我的  
+2.小海龟现在在哪里？订阅话题  
+3.怎么根据当前位置和目标位置计算角速度和线速度？两点之间距离->线速度 当前朝向和目标朝向差->角速度  
+小海龟实时位置在/turtle1/pose这个topic下  
+这里的逻辑是：订阅节点获取小海龟的位置，做一个处理，得到控制信息(线速度，角度) 通过发布节点将控制消息发送出去，小海龟会有对应的行动  
+```C++
+#include "rclcpp/rclcpp.hpp"
+#include "geometry_msgs/msg/twist.hpp"  // 需要控制小海龟 所以需要这个头文件
+#include <chrono>
+#include "turtlesim/msg/pose.hpp"
+
+using namespace std::chrono_literals;  // 对秒数进行自动转换
+
+class TurtleControlNode : public rclcpp::Node{
+private:
+    // 模板类的智能指针   发布者的智能指针  后续需要赋值
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_;
+    // 同理 订阅者
+    rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr subscriber_;
+    // 目标位置 C++11 引入统一初始化方式{}
+    double target_x_{1.0};
+    double target_y_{1.0};
+    // 比例系数
+    double k_{1.0};
+    // 最大速度  限制速度大小
+    double max_speed_{3.0};
+public:
+    // explicit关键字 强制要求显式调用构造函数进行对象初始化
+    explicit TurtleControlNode(const std::string& node_name) : Node(node_name){
+        publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/turtle1/cmd_vel", 10);
+        // 订阅别人的话题 所以名字必须是这个话题的名字
+        // 回调函数的参数就是收到的数据 参数：收到数据的共享指针
+        // 如果非要写成类成员函数 就需要通过std::bind 转为函数对象
+        subscriber_ = this->create_subscription<turtlesim::msg::Pose>("/turtle1/pose", 10, [&](const turtlesim::msg::Pose::SharedPtr pose){
+            // TODO 
+            // 根据当前位置 和 目标位置  计算出新的线速度和角速度
+            // 终端下 可以通过ros2 interface show turtlesim/msg/Pose 查看接口定义
+            // 1.获取当前的位置
+            auto cur_x = pose->x;
+            auto cur_y = pose->y;
+            RCLCPP_INFO(get_logger(), "当前: x=%f,y=%f", cur_x, cur_y);
+            // 2.计算当前小海龟位置跟目标位置之间的距离差和角度差
+            auto distance = std::sqrt(
+                (target_x_ - cur_x) * (target_x_ - cur_x) + 
+                (target_y_ - cur_y) * (target_y_ - cur_y)
+            );
+            // atan2 = arctan  可以求出角度
+            // 计算角度差
+            auto angle = std::atan2((target_y_ - cur_y), (target_x_ - cur_x)) - pose->theta;
+            // 3.控制策略
+            auto msg = geometry_msgs::msg::Twist();
+
+            // 距离 > 0.1  角度差 > 0.2 才作出控制 否则直接向前就好了
+            if(distance > 0.1){
+                if(fabs(angle) > 0.2){
+                    // 角度差太大了 需要原地转一下
+                    msg.angular.z = fabs(angle);
+                }
+                else{
+                    // 否则直接走
+                    msg.linear.x = k_ * distance;
+                }
+            }
+
+            // 限制线速度最大值
+            if(msg.linear.x > max_speed_){
+                msg.linear.x = max_speed_;
+            }
+            
+            // 再把控制的消息发布出去
+            // 这里相当于订阅节点用来获取位置，发布节点通过计算 将控制消息发布出去
+            publisher_->publish(msg);
+        });
+    }
+};
+
+int main(int argc, char** argv){
+    rclcpp::init(argc, argv);
+    auto node = std::make_shared<TurtleControlNode>("turtle_control");
+    // 运行节点
+    rclcpp::spin(node);
+    rclcpp::shutdown();
+    return 0;
+}
+```
