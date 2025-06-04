@@ -540,6 +540,8 @@ ros2 topic echo /turtle1/cmd_vel
 # 再次运行小海龟 发现小海龟会画圆
 ros2 run turtlesim turtlesim_node
 ```
+功能展示：  
+![演示动画](Video/circle_.gif)  
 订阅pose实现闭环控制  
 需求：告诉小海龟到指定位置，自己滚过去  
 核心问题：  
@@ -628,3 +630,5 @@ int main(int argc, char** argv){
     return 0;
 }
 ```
+功能展示：  
+![演示动画](Video/control_.gif)
