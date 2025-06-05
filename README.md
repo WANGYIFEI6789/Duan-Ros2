@@ -3,7 +3,8 @@ Image文件夹存放的是后续在讲解中会用到的图片
 Node文件夹用来存放学习基础知识时编写的代码  
 Topic文件夹是在学习topic通信时编写的代码  
 duan-src是存放项目代码的文件夹  
-Cpp-YiFei存放C++新特性示例代码
+Cpp-YiFei存放C++新特性示例代码  
+Video文件夹用于存放展示的视频  
 # 运行小海龟
 我们学习每个编程语言的时候，第一次学都是会去打印hello world  
 同理，学习ros2的时候会去打印小海龟
@@ -689,3 +690,4 @@ CMakeLists中的rosidl_generator_interfaces函数会帮我们生成接口代码
 source install/setup.bash
 ros2 interface show status_interfaces/msg/SystemStatus
 ```
+![消息接口](./Image/7.png)
