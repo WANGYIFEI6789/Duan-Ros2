@@ -631,4 +631,61 @@ int main(int argc, char** argv){
 }
 ```
 功能展示：  
-![演示动画](Video/control_.gif)
+![演示动画](Video/control_.gif)  
+实战项目：  
+需求：  
+第一，通过这个小工具可以看到系统的实时状态信息包括记录信息的时间、主机名称、CPU使用率、内存
+使用率、内存总大小、剩余内存、网络接收数据量和网络发送数据量； 
+第二，要有一个简单的界面，可以将系统信息显示出来；  
+第三，要能在局域网内其他主机上查看数据  
+分析：  
+第一，要能获取系统状态信息，Python库osutils  
+第二，要有一个展示界面，Qt  
+第三，要能共享数据，ROS2话题  
+用python编写系统状态信息，C++编写展示界面  
+在写这个项目之前，先了解学习一下自定义通信接口  
+```bash
+# 新建一个工作空间
+mkdir -p topic_practice_ws/src
+# 创建功能包 接口的定义也会放在功能包下 但是首先要做一些配置
+# status_interfaces 功能包名称
+# --build-type ament_cmake 构建类型
+# --dependencies builtin_interfaces rosidl_default_generators 依赖项
+# builtin_interfaces 为ros2接口提供基础类型定义，如时间戳、持续时间等都包含在内
+# rosidl_default_generators 用于生成ros2接口代码，若要自定义.msg 或 .srv文件
+# 就需要依赖此功能包 .msg文件：用于定义消息类型 .srv文件：用于定义服务类型
+ros2 pkg create status_interfaces --build-type ament_cmake --dependencies builtin_interfaces rosidl_default_generators --license Apache-2.0
+# 在status_interfaces目录下创建一个文件夹 文件夹名字是固定的 msg
+mkdir msg
+touch SystemStatus.msg
+# 可以去文件中定义消息类型了
+```
+```SystemStatus
+# .msg文件内容如下
+builtin_interfaces/Time stamp # 记录时间戳
+string host_name # 主机名字
+float32 cpu_percent # CPU使用率
+float32 memory_percent # 内存使用率
+float32 memory_total # 内存总大小
+float32 memory_available # 内存可用量
+float64 net_sent # 网络发送数据总量 1MB=8Mb
+float64 net_recv # 网络数据接收总量 MB
+```
+需要在CMakeLists.txt package.XML中配置一下 才能生成接口代码
+```CMakeLists
+# cmake中的函数，来自依赖rosidl_default_generators，用于将msg等消息接口定义文件转换成库或者头文件类
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/SystemStatus.msg"
+  DEPENDENCIES builtin_interfaces
+)
+```
+```XML
+<member_of_group>rosidl_interface_packages</member_of_group>
+```
+CMakeLists中的rosidl_generator_interfaces函数会帮我们生成接口代码  
+生存的代码和动态库在install文件夹下  
+查看消息接口的具体信息  
+```bash
+source install/setup.bash
+ros2 interface show status_interfaces/msg/SystemStatus
+```

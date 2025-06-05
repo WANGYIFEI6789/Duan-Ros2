@@ -1,0 +1,43 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from status_interfaces/msg/SystemStatus.msg
+// generated code does not contain a copyright notice
+
+#include "builtin_interfaces/msg/Time.idl"
+
+module status_interfaces {
+  module msg {
+    struct SystemStatus {
+      @verbatim (language="comment", text=
+        "记录时间戳")
+      builtin_interfaces::msg::Time stamp;
+
+      @verbatim (language="comment", text=
+        "主机名字")
+      string host_name;
+
+      @verbatim (language="comment", text=
+        "CPU使用率")
+      float cpu_percent;
+
+      @verbatim (language="comment", text=
+        "内存使用率")
+      float memory_percent;
+
+      @verbatim (language="comment", text=
+        "内存总大小")
+      float memory_total;
+
+      @verbatim (language="comment", text=
+        "内存可用量")
+      float memory_available;
+
+      @verbatim (language="comment", text=
+        "网络发送数据总量 1MB=8Mb")
+      double net_sent;
+
+      @verbatim (language="comment", text=
+        "网络数据接收总量 MB")
+      double net_recv;
+    };
+  };
+};
