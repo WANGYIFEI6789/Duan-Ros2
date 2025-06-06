@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "status_interfaces__py",
+		"source" : "/root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/status_interfaces__py"
+	}
+}

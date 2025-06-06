@@ -1,5 +1,5 @@
 CMakeFiles/status_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/status_interfaces/msg/system_status__type_support.cpp.o: \
- /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_typesupport_c/status_interfaces/msg/system_status__type_support.cpp \
+ /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_typesupport_c/status_interfaces/msg/system_status__type_support.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/cstddef \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -15,7 +15,7 @@ CMakeFiles/status_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/stat
  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_type_support_struct.h \
  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
  /opt/ros/humble/include/rosidl_typesupport_interface/rosidl_typesupport_interface/macros.h \
- /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__struct.h \
+ /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__struct.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -28,8 +28,8 @@ CMakeFiles/status_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/stat
  /opt/ros/humble/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.h \
  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/string.h \
  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence.h \
- /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__type_support.h \
- /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/rosidl_generator_c__visibility_control.h \
+ /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__type_support.h \
+ /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/rosidl_generator_c__visibility_control.h \
  /opt/ros/humble/include/rosidl_typesupport_c/rosidl_typesupport_c/identifier.h \
  /opt/ros/humble/include/rosidl_typesupport_c/rosidl_typesupport_c/visibility_control.h \
  /opt/ros/humble/include/rosidl_typesupport_c/rosidl_typesupport_c/message_type_support_dispatch.h \

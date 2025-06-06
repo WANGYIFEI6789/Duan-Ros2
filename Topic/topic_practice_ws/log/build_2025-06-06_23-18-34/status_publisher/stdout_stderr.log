@@ -1,0 +1,36 @@
+running egg_info
+creating ../../build/status_publisher/status_publisher.egg-info
+writing ../../build/status_publisher/status_publisher.egg-info/PKG-INFO
+writing dependency_links to ../../build/status_publisher/status_publisher.egg-info/dependency_links.txt
+writing entry points to ../../build/status_publisher/status_publisher.egg-info/entry_points.txt
+writing requirements to ../../build/status_publisher/status_publisher.egg-info/requires.txt
+writing top-level names to ../../build/status_publisher/status_publisher.egg-info/top_level.txt
+writing manifest file '../../build/status_publisher/status_publisher.egg-info/SOURCES.txt'
+reading manifest file '../../build/status_publisher/status_publisher.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../../build/status_publisher/status_publisher.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build
+creating /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib
+creating /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher
+copying status_publisher/sys_status_pub.py -> /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher
+copying status_publisher/__init__.py -> /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher
+running install
+running install_lib
+creating /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher
+copying /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher/sys_status_pub.py -> /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher
+copying /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher/__init__.py -> /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher
+byte-compiling /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher/sys_status_pub.py to sys_status_pub.cpython-310.pyc
+byte-compiling /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/ament_index
+creating /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/ament_index/resource_index
+creating /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/ament_index/resource_index/packages
+copying resource/status_publisher -> /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/ament_index/resource_index/packages
+copying package.xml -> /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/status_publisher
+running install_egg_info
+Copying ../../build/status_publisher/status_publisher.egg-info to /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher-0.0.0-py3.10.egg-info
+running install_scripts
+Installing sys_status_pub script to /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/status_publisher
+writing list of installed files to '/root/Code/duan/Topic/topic_practice_ws/build/status_publisher/install.log'

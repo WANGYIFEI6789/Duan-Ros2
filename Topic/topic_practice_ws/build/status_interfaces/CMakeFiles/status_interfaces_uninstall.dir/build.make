@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces
+CMAKE_SOURCE_DIR = /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces
+CMAKE_BINARY_DIR = /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces
 
 # Utility rule file for status_interfaces_uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/status_interfaces_uninstall.dir/compiler_depend.make
 include CMakeFiles/status_interfaces_uninstall.dir/progress.make
 
 CMakeFiles/status_interfaces_uninstall:
-	/usr/bin/cmake -P /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/usr/bin/cmake -P /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 status_interfaces_uninstall: CMakeFiles/status_interfaces_uninstall
 status_interfaces_uninstall: CMakeFiles/status_interfaces_uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/status_interfaces_uninstall.dir/clean:
 .PHONY : CMakeFiles/status_interfaces_uninstall.dir/clean
 
 CMakeFiles/status_interfaces_uninstall.dir/depend:
-	cd /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles/status_interfaces_uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles/status_interfaces_uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/status_interfaces_uninstall.dir/depend
 

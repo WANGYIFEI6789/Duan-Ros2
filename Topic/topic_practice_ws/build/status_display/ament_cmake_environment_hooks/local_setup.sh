@@ -2,7 +2,7 @@
 
 # since this file is sourced use either the provided AMENT_CURRENT_PREFIX
 # or fall back to the destination set at configure time
-: ${AMENT_CURRENT_PREFIX:="/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display"}
+: ${AMENT_CURRENT_PREFIX:="/root/Code/duan/Topic/topic_practice_ws/install/status_display"}
 if [ ! -d "$AMENT_CURRENT_PREFIX" ]; then
   if [ -z "$COLCON_CURRENT_PREFIX" ]; then
     echo "The compile time prefix path '$AMENT_CURRENT_PREFIX' doesn't " \

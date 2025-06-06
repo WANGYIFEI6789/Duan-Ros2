@@ -1,5 +1,5 @@
 CMakeFiles/hello_qt5.dir/src/hello_qt.cpp.o: \
- /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_display/src/hello_qt.cpp \
+ /root/Code/duan/Topic/topic_practice_ws/src/status_display/src/hello_qt.cpp \
  /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qapplication.h \

@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = -DRCUTILS_ENABLE_FAULT_INJECTION -DROSIDL_GENERATOR_C_BUILDING_DLL_status_interfaces -DROS_PACKAGE_NAME=\"status_interfaces\"
 
-C_INCLUDES = -I/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c -isystem /opt/ros/humble/include/builtin_interfaces -isystem /opt/ros/humble/include/rosidl_runtime_c -isystem /opt/ros/humble/include/rcutils -isystem /opt/ros/humble/include/rosidl_typesupport_interface
+C_INCLUDES = -I/root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c -isystem /opt/ros/humble/include/builtin_interfaces -isystem /opt/ros/humble/include/rosidl_runtime_c -isystem /opt/ros/humble/include/rcutils -isystem /opt/ros/humble/include/rosidl_typesupport_interface
 
 C_FLAGS = -fPIC -Wall -std=gnu11
 

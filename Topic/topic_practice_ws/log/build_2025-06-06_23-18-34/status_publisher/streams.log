@@ -1,0 +1,38 @@
+[1.147s] Invoking command in '/root/Code/duan/Topic/topic_practice_ws/src/status_publisher': AMENT_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces HISTTIMEFORMAT=%F %T root LD_LIBRARY_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Code/duan/Topic/topic_practice_ws/build/status_publisher/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages:/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/status_publisher build --build-base /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build install --record /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/install.log --single-version-externally-managed install_data
+[1.542s] running egg_info
+[1.543s] creating ../../build/status_publisher/status_publisher.egg-info
+[1.543s] writing ../../build/status_publisher/status_publisher.egg-info/PKG-INFO
+[1.544s] writing dependency_links to ../../build/status_publisher/status_publisher.egg-info/dependency_links.txt
+[1.544s] writing entry points to ../../build/status_publisher/status_publisher.egg-info/entry_points.txt
+[1.544s] writing requirements to ../../build/status_publisher/status_publisher.egg-info/requires.txt
+[1.544s] writing top-level names to ../../build/status_publisher/status_publisher.egg-info/top_level.txt
+[1.544s] writing manifest file '../../build/status_publisher/status_publisher.egg-info/SOURCES.txt'
+[1.548s] reading manifest file '../../build/status_publisher/status_publisher.egg-info/SOURCES.txt'
+[1.548s] adding license file 'LICENSE'
+[1.549s] writing manifest file '../../build/status_publisher/status_publisher.egg-info/SOURCES.txt'
+[1.549s] running build
+[1.550s] running build_py
+[1.550s] creating /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build
+[1.550s] creating /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib
+[1.550s] creating /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher
+[1.550s] copying status_publisher/sys_status_pub.py -> /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher
+[1.550s] copying status_publisher/__init__.py -> /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher
+[1.550s] running install
+[1.551s] running install_lib
+[1.551s] creating /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher
+[1.552s] copying /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher/sys_status_pub.py -> /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher
+[1.552s] copying /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build/lib/status_publisher/__init__.py -> /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher
+[1.552s] byte-compiling /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher/sys_status_pub.py to sys_status_pub.cpython-310.pyc
+[1.553s] byte-compiling /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher/__init__.py to __init__.cpython-310.pyc
+[1.553s] running install_data
+[1.554s] creating /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/ament_index
+[1.554s] creating /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/ament_index/resource_index
+[1.554s] creating /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/ament_index/resource_index/packages
+[1.554s] copying resource/status_publisher -> /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/ament_index/resource_index/packages
+[1.554s] copying package.xml -> /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/share/status_publisher
+[1.554s] running install_egg_info
+[1.557s] Copying ../../build/status_publisher/status_publisher.egg-info to /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher-0.0.0-py3.10.egg-info
+[1.558s] running install_scripts
+[1.589s] Installing sys_status_pub script to /root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/status_publisher
+[1.590s] writing list of installed files to '/root/Code/duan/Topic/topic_practice_ws/build/status_publisher/install.log'
+[1.613s] Invoked command in '/root/Code/duan/Topic/topic_practice_ws/src/status_publisher' returned '0': AMENT_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces HISTTIMEFORMAT=%F %T root LD_LIBRARY_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Code/duan/Topic/topic_practice_ws/build/status_publisher/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/Code/duan/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages:/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/status_publisher build --build-base /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/build install --record /root/Code/duan/Topic/topic_practice_ws/build/status_publisher/install.log --single-version-externally-managed install_data

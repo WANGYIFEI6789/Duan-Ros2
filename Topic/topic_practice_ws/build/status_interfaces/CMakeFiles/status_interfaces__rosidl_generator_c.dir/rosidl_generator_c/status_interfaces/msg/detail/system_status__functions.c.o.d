@@ -1,7 +1,7 @@
 CMakeFiles/status_interfaces__rosidl_generator_c.dir/rosidl_generator_c/status_interfaces/msg/detail/system_status__functions.c.o: \
- /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__functions.c \
+ /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__functions.c \
  /usr/include/stdc-predef.h \
- /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__functions.h \
+ /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__functions.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -43,8 +43,8 @@ CMakeFiles/status_interfaces__rosidl_generator_c.dir/rosidl_generator_c/status_i
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/visibility_control.h \
- /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/rosidl_generator_c__visibility_control.h \
- /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__struct.h \
+ /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/rosidl_generator_c__visibility_control.h \
+ /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_c/status_interfaces/msg/detail/system_status__struct.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \

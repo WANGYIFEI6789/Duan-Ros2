@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces
+CMAKE_SOURCE_DIR = /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces
+CMAKE_BINARY_DIR = /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces
 
 # Utility rule file for ament_cmake_python_copy_status_interfaces.
 
@@ -67,7 +67,7 @@ include CMakeFiles/ament_cmake_python_copy_status_interfaces.dir/compiler_depend
 include CMakeFiles/ament_cmake_python_copy_status_interfaces.dir/progress.make
 
 CMakeFiles/ament_cmake_python_copy_status_interfaces:
-	/usr/bin/cmake -E copy_directory /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_py/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/ament_cmake_python/status_interfaces/status_interfaces
+	/usr/bin/cmake -E copy_directory /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_py/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/ament_cmake_python/status_interfaces/status_interfaces
 
 ament_cmake_python_copy_status_interfaces: CMakeFiles/ament_cmake_python_copy_status_interfaces
 ament_cmake_python_copy_status_interfaces: CMakeFiles/ament_cmake_python_copy_status_interfaces.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/ament_cmake_python_copy_status_interfaces.dir/clean:
 .PHONY : CMakeFiles/ament_cmake_python_copy_status_interfaces.dir/clean
 
 CMakeFiles/ament_cmake_python_copy_status_interfaces.dir/depend:
-	cd /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles/ament_cmake_python_copy_status_interfaces.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles/ament_cmake_python_copy_status_interfaces.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ament_cmake_python_copy_status_interfaces.dir/depend
 

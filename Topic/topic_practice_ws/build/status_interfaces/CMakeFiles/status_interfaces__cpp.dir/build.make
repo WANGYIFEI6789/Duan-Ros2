@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces
+CMAKE_SOURCE_DIR = /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces
+CMAKE_BINARY_DIR = /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces
 
 # Utility rule file for status_interfaces__cpp.
 
@@ -91,8 +91,8 @@ rosidl_generator_cpp/status_interfaces/msg/system_status.hpp: /opt/ros/humble/sh
 rosidl_generator_cpp/status_interfaces/msg/system_status.hpp: rosidl_adapter/status_interfaces/msg/SystemStatus.idl
 rosidl_generator_cpp/status_interfaces/msg/system_status.hpp: /opt/ros/humble/share/builtin_interfaces/msg/Duration.idl
 rosidl_generator_cpp/status_interfaces/msg/system_status.hpp: /opt/ros/humble/share/builtin_interfaces/msg/Time.idl
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code for ROS interfaces"
-	/usr/bin/python3 /opt/ros/humble/share/rosidl_generator_cpp/cmake/../../../lib/rosidl_generator_cpp/rosidl_generator_cpp --generator-arguments-file /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_cpp__arguments.json
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code for ROS interfaces"
+	/usr/bin/python3 /opt/ros/humble/share/rosidl_generator_cpp/cmake/../../../lib/rosidl_generator_cpp/rosidl_generator_cpp --generator-arguments-file /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/rosidl_generator_cpp__arguments.json
 
 rosidl_generator_cpp/status_interfaces/msg/detail/system_status__builder.hpp: rosidl_generator_cpp/status_interfaces/msg/system_status.hpp
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/status_interfaces/msg/detail/system_status__builder.hpp
@@ -124,6 +124,6 @@ CMakeFiles/status_interfaces__cpp.dir/clean:
 .PHONY : CMakeFiles/status_interfaces__cpp.dir/clean
 
 CMakeFiles/status_interfaces__cpp.dir/depend:
-	cd /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles/status_interfaces__cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles/status_interfaces__cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/status_interfaces__cpp.dir/depend
 

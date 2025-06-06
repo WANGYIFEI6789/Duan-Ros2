@@ -1,0 +1,68 @@
+[0.010s] Invoking command in '/root/Code/duan/Topic/topic_practice_ws/build/status_display': AMENT_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:/opt/ros/humble HISTTIMEFORMAT=%F %T root LD_LIBRARY_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /root/Code/duan/Topic/topic_practice_ws/src/status_display -DCMAKE_INSTALL_PREFIX=/root/Code/duan/Topic/topic_practice_ws/install/status_display
+[0.066s] -- The C compiler identification is GNU 11.4.0
+[0.124s] -- The CXX compiler identification is GNU 11.4.0
+[0.131s] -- Detecting C compiler ABI info
+[0.214s] -- Detecting C compiler ABI info - done
+[0.222s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.222s] -- Detecting C compile features
+[0.223s] -- Detecting C compile features - done
+[0.226s] -- Detecting CXX compiler ABI info
+[0.313s] -- Detecting CXX compiler ABI info - done
+[0.318s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.319s] -- Detecting CXX compile features
+[0.319s] -- Detecting CXX compile features - done
+[0.322s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.516s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.608s] -- Found rclcpp: 16.0.12 (/opt/ros/humble/share/rclcpp/cmake)
+[0.662s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.668s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.676s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.688s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.707s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.793s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.800s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.957s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.999s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.090s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.122s] -- Looking for pthread.h
+[1.301s] -- Looking for pthread.h - found
+[1.301s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.378s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.378s] -- Found Threads: TRUE  
+[1.495s] -- Found status_interfaces: 0.0.0 (/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake)
+[1.582s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.682s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.682s] -- Configured cppcheck include dirs: 
+[1.682s] -- Configured cppcheck exclude dirs and/or files: 
+[1.683s] -- Added test 'lint_cmake' to check CMake code style
+[1.684s] -- Added test 'uncrustify' to check C / C++ code style
+[1.684s] -- Configured uncrustify additional arguments: 
+[1.685s] -- Added test 'xmllint' to check XML markup files
+[1.687s] -- Configuring done
+[1.704s] -- Generating done
+[1.709s] -- Build files have been written to: /root/Code/duan/Topic/topic_practice_ws/build/status_display
+[1.721s] Invoked command in '/root/Code/duan/Topic/topic_practice_ws/build/status_display' returned '0': AMENT_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:/opt/ros/humble HISTTIMEFORMAT=%F %T root LD_LIBRARY_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /root/Code/duan/Topic/topic_practice_ws/src/status_display -DCMAKE_INSTALL_PREFIX=/root/Code/duan/Topic/topic_practice_ws/install/status_display
+[1.721s] Invoking command in '/root/Code/duan/Topic/topic_practice_ws/build/status_display': AMENT_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:/opt/ros/humble HISTTIMEFORMAT=%F %T root LD_LIBRARY_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /root/Code/duan/Topic/topic_practice_ws/build/status_display -- -j2 -l2
+[1.772s] [ 50%] [32mBuilding CXX object CMakeFiles/hello_qt5.dir/src/hello_qt.cpp.o[0m
+[2.925s] [100%] [32m[1mLinking CXX executable hello_qt5[0m
+[3.497s] [100%] Built target hello_qt5
+[3.517s] Invoked command in '/root/Code/duan/Topic/topic_practice_ws/build/status_display' returned '0': AMENT_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:/opt/ros/humble HISTTIMEFORMAT=%F %T root LD_LIBRARY_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /root/Code/duan/Topic/topic_practice_ws/build/status_display -- -j2 -l2
+[3.518s] Invoking command in '/root/Code/duan/Topic/topic_practice_ws/build/status_display': AMENT_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:/opt/ros/humble HISTTIMEFORMAT=%F %T root LD_LIBRARY_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /root/Code/duan/Topic/topic_practice_ws/build/status_display
+[3.528s] -- Install configuration: ""
+[3.528s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/lib/status_display/hello_qt5
+[3.529s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/ament_index/resource_index/package_run_dependencies/status_display
+[3.529s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/ament_index/resource_index/parent_prefix_path/status_display
+[3.529s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/environment/ament_prefix_path.sh
+[3.530s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/environment/ament_prefix_path.dsv
+[3.530s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/environment/path.sh
+[3.530s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/environment/path.dsv
+[3.531s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/local_setup.bash
+[3.531s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/local_setup.sh
+[3.531s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/local_setup.zsh
+[3.532s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/local_setup.dsv
+[3.532s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/package.dsv
+[3.533s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/ament_index/resource_index/packages/status_display
+[3.533s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/cmake/status_displayConfig.cmake
+[3.533s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/cmake/status_displayConfig-version.cmake
+[3.534s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_display/share/status_display/package.xml
+[3.539s] Invoked command in '/root/Code/duan/Topic/topic_practice_ws/build/status_display' returned '0': AMENT_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces:/opt/ros/humble HISTTIMEFORMAT=%F %T root LD_LIBRARY_PATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /root/Code/duan/Topic/topic_practice_ws/build/status_display

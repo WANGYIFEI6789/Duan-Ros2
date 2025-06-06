@@ -1,0 +1,230 @@
+[0.009s] Invoking command in '/root/Code/duan/Topic/topic_practice_ws/build/status_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces -DCMAKE_INSTALL_PREFIX=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces
+[0.243s] -- The C compiler identification is GNU 11.4.0
+[0.374s] -- The CXX compiler identification is GNU 11.4.0
+[0.394s] -- Detecting C compiler ABI info
+[0.475s] -- Detecting C compiler ABI info - done
+[0.482s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.482s] -- Detecting C compile features
+[0.484s] -- Detecting C compile features - done
+[0.489s] -- Detecting CXX compiler ABI info
+[0.576s] -- Detecting CXX compiler ABI info - done
+[0.583s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.583s] -- Detecting CXX compile features
+[0.584s] -- Detecting CXX compile features - done
+[0.605s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.779s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.912s] -- Found builtin_interfaces: 1.2.1 (/opt/ros/humble/share/builtin_interfaces/cmake)
+[0.977s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.986s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.006s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.032s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.060s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.086s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[1.344s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[1.659s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.782s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.806s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[1.809s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[1.837s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[1.837s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.837s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[1.837s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[1.859s] -- Found PythonExtra: .so  
+[1.895s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.939s] -- Added test 'lint_cmake' to check CMake code style
+[1.941s] -- Added test 'xmllint' to check XML markup files
+[1.945s] -- Configuring done
+[1.980s] -- Generating done
+[1.992s] -- Build files have been written to: /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces
+[2.000s] Invoked command in '/root/Code/duan/Topic/topic_practice_ws/build/status_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces -DCMAKE_INSTALL_PREFIX=/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces
+[2.002s] Invoking command in '/root/Code/duan/Topic/topic_practice_ws/build/status_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces -- -j2 -l2
+[2.040s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[2.050s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[2.455s] [  6%] Built target status_interfaces__cpp
+[2.479s] [  6%] Built target ament_cmake_python_copy_status_interfaces
+[2.486s] [  9%] [32mBuilding C object CMakeFiles/status_interfaces__rosidl_generator_c.dir/rosidl_generator_c/status_interfaces/msg/detail/system_status__functions.c.o[0m
+[2.488s] [ 12%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[2.598s] [ 16%] [32m[1mLinking C shared library libstatus_interfaces__rosidl_generator_c.so[0m
+[2.666s] [ 16%] Built target status_interfaces__rosidl_generator_c
+[2.676s] [ 19%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[2.927s] [ 22%] [32mBuilding CXX object CMakeFiles/status_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/status_interfaces/msg/system_status__type_support.cpp.o[0m
+[3.057s] [ 25%] [32mBuilding CXX object CMakeFiles/status_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/status_interfaces/msg/detail/dds_fastrtps/system_status__type_support.cpp.o[0m
+[3.505s] [ 29%] [32m[1mLinking CXX shared library libstatus_interfaces__rosidl_typesupport_cpp.so[0m
+[3.586s] [ 29%] Built target status_interfaces__rosidl_typesupport_cpp
+[3.597s] [ 32%] [32m[1mLinking CXX shared library libstatus_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[3.611s] [ 35%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[3.757s] [ 35%] Built target status_interfaces__rosidl_typesupport_fastrtps_cpp
+[3.798s] [ 38%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[3.994s] [ 41%] [32mBuilding C object CMakeFiles/status_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/status_interfaces/msg/detail/system_status__type_support.c.o[0m
+[4.074s] [ 45%] [32m[1mLinking C shared library libstatus_interfaces__rosidl_typesupport_introspection_c.so[0m
+[4.171s] [ 45%] Built target status_interfaces__rosidl_typesupport_introspection_c
+[4.206s] [ 48%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[4.230s] [ 51%] [32mBuilding CXX object CMakeFiles/status_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/status_interfaces/msg/system_status__type_support.cpp.o[0m
+[4.263s] [ 54%] [32m[1mLinking CXX shared library libstatus_interfaces__rosidl_typesupport_c.so[0m
+[4.374s] [ 54%] Built target status_interfaces__rosidl_typesupport_c
+[4.731s] [ 58%] [32mBuilding CXX object CMakeFiles/status_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/status_interfaces/msg/detail/system_status__type_support.cpp.o[0m
+[4.811s] running egg_info
+[4.812s] creating status_interfaces.egg-info
+[4.812s] writing status_interfaces.egg-info/PKG-INFO
+[4.813s] writing dependency_links to status_interfaces.egg-info/dependency_links.txt
+[4.813s] writing top-level names to status_interfaces.egg-info/top_level.txt
+[4.813s] writing manifest file 'status_interfaces.egg-info/SOURCES.txt'
+[4.817s] reading manifest file 'status_interfaces.egg-info/SOURCES.txt'
+[4.818s] writing manifest file 'status_interfaces.egg-info/SOURCES.txt'
+[4.861s] [ 58%] Built target ament_cmake_python_build_status_interfaces_egg
+[4.891s] [ 61%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[5.237s] [ 64%] [32mBuilding CXX object CMakeFiles/status_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/status_interfaces/msg/detail/system_status__type_support_c.cpp.o[0m
+[5.271s] [ 67%] [32m[1mLinking CXX shared library libstatus_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[5.331s] [ 67%] Built target status_interfaces__rosidl_typesupport_introspection_cpp
+[5.586s] [ 70%] [32m[1mLinking CXX shared library libstatus_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[5.653s] [ 70%] Built target status_interfaces__rosidl_typesupport_fastrtps_c
+[5.671s] [ 70%] Built target status_interfaces
+[5.690s] [ 74%] [34m[1mGenerating Python code for ROS interfaces[0m
+[6.122s] [ 74%] Built target status_interfaces__py
+[6.141s] [ 77%] [32mBuilding C object CMakeFiles/status_interfaces__rosidl_generator_py.dir/rosidl_generator_py/status_interfaces/msg/_system_status_s.c.o[0m
+[6.335s] [ 80%] [32m[1mLinking C shared library rosidl_generator_py/status_interfaces/libstatus_interfaces__rosidl_generator_py.so[0m
+[6.376s] [ 80%] Built target status_interfaces__rosidl_generator_py
+[6.395s] [ 83%] [32mBuilding C object CMakeFiles/status_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/status_interfaces/_status_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[6.395s] [ 87%] [32mBuilding C object CMakeFiles/status_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/status_interfaces/_status_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[6.495s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/status_interfaces/status_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[6.496s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/status_interfaces/status_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[6.536s] [ 93%] Built target status_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[6.536s] [ 93%] Built target status_interfaces__rosidl_typesupport_introspection_c__pyext
+[6.557s] [ 96%] [32mBuilding C object CMakeFiles/status_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/status_interfaces/_status_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[6.656s] [100%] [32m[1mLinking C shared library rosidl_generator_py/status_interfaces/status_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[6.695s] [100%] Built target status_interfaces__rosidl_typesupport_c__pyext
+[6.708s] Invoked command in '/root/Code/duan/Topic/topic_practice_ws/build/status_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --build /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces -- -j2 -l2
+[6.718s] Invoking command in '/root/Code/duan/Topic/topic_practice_ws/build/status_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces
+[6.726s] -- Install configuration: ""
+[6.727s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/ament_index/resource_index/rosidl_interfaces/status_interfaces
+[6.727s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces
+[6.727s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg
+[6.728s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail
+[6.728s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__functions.h
+[6.728s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__functions.c
+[6.728s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__struct.h
+[6.728s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__type_support.h
+[6.728s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/system_status.h
+[6.728s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/rosidl_generator_c__visibility_control.h
+[6.729s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/environment/library_path.sh
+[6.729s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/environment/library_path.dsv
+[6.729s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_generator_c.so
+[6.729s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_generator_c.so" to ""
+[6.730s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces
+[6.730s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg
+[6.730s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail
+[6.730s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__rosidl_typesupport_fastrtps_c.h
+[6.730s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[6.730s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_fastrtps_c.so
+[6.731s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[6.731s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces
+[6.731s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg
+[6.731s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[6.731s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/system_status.hpp
+[6.731s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail
+[6.732s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__traits.hpp
+[6.732s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__type_support.hpp
+[6.732s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__builder.hpp
+[6.732s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__struct.hpp
+[6.733s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces
+[6.733s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg
+[6.733s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[6.733s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail
+[6.733s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/dds_fastrtps
+[6.733s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__rosidl_typesupport_fastrtps_cpp.hpp
+[6.733s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[6.734s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[6.734s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces
+[6.734s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg
+[6.734s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[6.734s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail
+[6.735s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__type_support.c
+[6.735s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__rosidl_typesupport_introspection_c.h
+[6.735s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_introspection_c.so
+[6.735s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[6.736s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_c.so
+[6.736s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_c.so" to ""
+[6.736s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces
+[6.736s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg
+[6.736s] -- Up-to-date: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail
+[6.736s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__type_support.cpp
+[6.736s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/include/status_interfaces/status_interfaces/msg/detail/system_status__rosidl_typesupport_introspection_cpp.hpp
+[6.736s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_introspection_cpp.so
+[6.736s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[6.737s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_cpp.so
+[6.737s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_typesupport_cpp.so" to ""
+[6.737s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/environment/pythonpath.sh
+[6.737s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/environment/pythonpath.dsv
+[6.737s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces-0.0.0-py3.10.egg-info
+[6.738s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces-0.0.0-py3.10.egg-info/PKG-INFO
+[6.739s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces-0.0.0-py3.10.egg-info/top_level.txt
+[6.739s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces-0.0.0-py3.10.egg-info/dependency_links.txt
+[6.740s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces-0.0.0-py3.10.egg-info/SOURCES.txt
+[6.740s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces
+[6.740s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/_status_interfaces_s.ep.rosidl_typesupport_c.c
+[6.740s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/status_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[6.740s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/status_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[6.740s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/status_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[6.741s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/libstatus_interfaces__rosidl_generator_py.so
+[6.741s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/msg
+[6.741s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/msg/_system_status_s.c
+[6.741s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/msg/__init__.py
+[6.741s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/msg/_system_status.py
+[6.741s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/__init__.py
+[6.741s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/_status_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[6.741s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/_status_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[6.776s] Listing '/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces'...
+[6.776s] Compiling '/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/__init__.py'...
+[6.776s] Listing '/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/msg'...
+[6.776s] Compiling '/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/msg/__init__.py'...
+[6.777s] Compiling '/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/msg/_system_status.py'...
+[6.781s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/status_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[6.782s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/status_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""
+[6.782s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/status_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[6.783s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/status_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""
+[6.783s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/status_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[6.783s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/local/lib/python3.10/dist-packages/status_interfaces/status_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""
+[6.783s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_generator_py.so
+[6.784s] -- Set runtime path of "/root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/lib/libstatus_interfaces__rosidl_generator_py.so" to ""
+[6.784s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/msg/SystemStatus.idl
+[6.784s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/msg/SystemStatus.msg
+[6.784s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/ament_index/resource_index/package_run_dependencies/status_interfaces
+[6.785s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/ament_index/resource_index/parent_prefix_path/status_interfaces
+[6.785s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/environment/ament_prefix_path.sh
+[6.785s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/environment/ament_prefix_path.dsv
+[6.785s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/environment/path.sh
+[6.785s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/environment/path.dsv
+[6.785s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/local_setup.bash
+[6.786s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/local_setup.sh
+[6.786s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/local_setup.zsh
+[6.786s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/local_setup.dsv
+[6.786s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/package.dsv
+[6.786s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/ament_index/resource_index/packages/status_interfaces
+[6.787s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/export_status_interfaces__rosidl_generator_cExport.cmake
+[6.787s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/export_status_interfaces__rosidl_generator_cExport-noconfig.cmake
+[6.787s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/export_status_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[6.787s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/export_status_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[6.788s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/export_status_interfaces__rosidl_generator_cppExport.cmake
+[6.788s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/export_status_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[6.788s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/export_status_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[6.788s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[6.789s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[6.789s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfaces__rosidl_typesupport_cExport.cmake
+[6.789s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[6.789s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[6.790s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[6.790s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfaces__rosidl_typesupport_cppExport.cmake
+[6.790s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[6.791s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/export_status_interfaces__rosidl_generator_pyExport.cmake
+[6.791s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/export_status_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[6.791s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/rosidl_cmake-extras.cmake
+[6.792s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[6.792s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[6.792s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[6.792s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[6.793s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[6.793s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[6.793s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfacesConfig.cmake
+[6.793s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/cmake/status_interfacesConfig-version.cmake
+[6.793s] -- Installing: /root/Code/duan/Topic/topic_practice_ws/install/status_interfaces/share/status_interfaces/package.xml
+[6.795s] Invoked command in '/root/Code/duan/Topic/topic_practice_ws/build/status_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble HISTTIMEFORMAT=%F %T root /usr/bin/cmake --install /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces

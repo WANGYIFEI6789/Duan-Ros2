@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_display
+CMAKE_SOURCE_DIR = /root/Code/duan/Topic/topic_practice_ws/src/status_display
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display
+CMAKE_BINARY_DIR = /root/Code/duan/Topic/topic_practice_ws/build/status_display
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -83,14 +83,14 @@ clean: CMakeFiles/hello_qt5.dir/clean
 CMakeFiles/uninstall.dir/all: CMakeFiles/status_display_uninstall.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display/CMakeFiles --progress-num= "Built target uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/root/Code/duan/Topic/topic_practice_ws/build/status_display/CMakeFiles --progress-num= "Built target uninstall"
 .PHONY : CMakeFiles/uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
 .PHONY : CMakeFiles/uninstall.dir/rule
 
 # Convenience name for target.
@@ -109,14 +109,14 @@ CMakeFiles/uninstall.dir/clean:
 CMakeFiles/status_display_uninstall.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/status_display_uninstall.dir/build.make CMakeFiles/status_display_uninstall.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/status_display_uninstall.dir/build.make CMakeFiles/status_display_uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display/CMakeFiles --progress-num= "Built target status_display_uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/root/Code/duan/Topic/topic_practice_ws/build/status_display/CMakeFiles --progress-num= "Built target status_display_uninstall"
 .PHONY : CMakeFiles/status_display_uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/status_display_uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/status_display_uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
 .PHONY : CMakeFiles/status_display_uninstall.dir/rule
 
 # Convenience name for target.
@@ -135,14 +135,14 @@ CMakeFiles/status_display_uninstall.dir/clean:
 CMakeFiles/hello_qt5.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello_qt5.dir/build.make CMakeFiles/hello_qt5.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello_qt5.dir/build.make CMakeFiles/hello_qt5.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display/CMakeFiles --progress-num=1,2 "Built target hello_qt5"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/root/Code/duan/Topic/topic_practice_ws/build/status_display/CMakeFiles --progress-num=1,2 "Built target hello_qt5"
 .PHONY : CMakeFiles/hello_qt5.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/hello_qt5.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Topic/topic_practice_ws/build/status_display/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/hello_qt5.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Code/duan/Topic/topic_practice_ws/build/status_display/CMakeFiles 0
 .PHONY : CMakeFiles/hello_qt5.dir/rule
 
 # Convenience name for target.

@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces
+CMAKE_SOURCE_DIR = /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces
+CMAKE_BINARY_DIR = /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces
 
 # Utility rule file for status_interfaces.
 
@@ -66,7 +66,7 @@ include CMakeFiles/status_interfaces.dir/compiler_depend.make
 # Include the progress variables for this target.
 include CMakeFiles/status_interfaces.dir/progress.make
 
-CMakeFiles/status_interfaces: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces/msg/SystemStatus.msg
+CMakeFiles/status_interfaces: /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces/msg/SystemStatus.msg
 CMakeFiles/status_interfaces: /opt/ros/humble/share/builtin_interfaces/msg/Duration.idl
 CMakeFiles/status_interfaces: /opt/ros/humble/share/builtin_interfaces/msg/Time.idl
 
@@ -83,6 +83,6 @@ CMakeFiles/status_interfaces.dir/clean:
 .PHONY : CMakeFiles/status_interfaces.dir/clean
 
 CMakeFiles/status_interfaces.dir/depend:
-	cd /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles/status_interfaces.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces /root/Code/duan/Topic/topic_practice_ws/src/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces /root/Code/duan/Topic/topic_practice_ws/build/status_interfaces/CMakeFiles/status_interfaces.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/status_interfaces.dir/depend
 
