@@ -1,0 +1,21 @@
+[35m[1mConsolidate compiler generated dependencies of target hello_qt5[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/hello_qt5.dir/src/hello_qt.cpp.o[0m
+[100%] [32m[1mLinking CXX executable hello_qt5[0m
+[100%] Built target hello_qt5
+-- Install configuration: ""
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/lib/status_display/hello_qt5
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/ament_index/resource_index/package_run_dependencies/status_display
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/ament_index/resource_index/parent_prefix_path/status_display
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/environment/ament_prefix_path.sh
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/environment/ament_prefix_path.dsv
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/environment/path.sh
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/environment/path.dsv
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/local_setup.bash
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/local_setup.sh
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/local_setup.zsh
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/local_setup.dsv
+-- Up-to-date: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/package.dsv
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/ament_index/resource_index/packages/status_display
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/cmake/status_displayConfig.cmake
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/cmake/status_displayConfig-version.cmake
+-- Installing: /home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_display/share/status_display/package.xml

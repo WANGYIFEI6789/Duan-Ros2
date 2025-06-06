@@ -1,0 +1,15 @@
+[01m[K/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_display/src/hello_qt.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_display/src/hello_qt.cpp:8:45:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KQString::fromStdString()[m[K’
+    8 |     QString message = [01;31m[KQString::fromStdString()[m[K;
+      |                       [01;31m[K~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+In file included from [01m[K/usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreapplication.h:44[m[K,
+                 from [01m[K/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qapplication.h:44[m[K,
+                 from [01m[K/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication:1[m[K,
+                 from [01m[K/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/src/status_display/src/hello_qt.cpp:1[m[K:
+[01m[K/usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h:1555:16:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kstatic QString QString::fromStdString(const string&)[m[K’
+ 1555 | inline QString [01;36m[KQString[m[K::fromStdString(const std::string &s)
+      |                [01;36m[K^~~~~~~[m[K
+[01m[K/usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h:1555:16:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+gmake[2]: *** [CMakeFiles/hello_qt5.dir/build.make:76：CMakeFiles/hello_qt5.dir/src/hello_qt.cpp.o] 错误 1
+gmake[1]: *** [CMakeFiles/Makefile2:137：CMakeFiles/hello_qt5.dir/all] 错误 2
+gmake: *** [Makefile:146：all] 错误 2

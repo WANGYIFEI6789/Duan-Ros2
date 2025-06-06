@@ -690,4 +690,90 @@ CMakeLists中的rosidl_generator_interfaces函数会帮我们生成接口代码
 source install/setup.bash
 ros2 interface show status_interfaces/msg/SystemStatus
 ```
-![消息接口](./Image/7.png)
+![消息接口](./Image/7.png)  
+获取系统信息可以使用python中的库，所以这里使用python来编写发布信息的节点  
+发布信息的类型就是我们刚才自定义的消息接口  
+```bash
+# 创建功能包
+# 发布节点 status_interfaces是刚才自定义的消息接口 这里需要作为依赖
+ros2 pkg create status_publisher --build-type ament_python --dependencies rclpy status_interfaces --license Apache-2.0
+```
+```python
+import rclpy
+from status_interfaces.msg import SystemStatus
+from rclpy.node import Node 
+import psutil
+import platform
+
+class SysStatusPub(Node):
+    def __init__(self, node_name):
+        super().__init__(node_name)
+        self.status_publisher_ = self.create_publisher(
+            SystemStatus, 'sys_status', 10
+        )
+        self.timer = self.create_timer(1.0, self.timer_callback)
+
+    def timer_callback(self):
+        """
+        builtin_interfaces/Time stamp # 记录时间戳
+        string host_name # 主机名字
+        float32 cpu_percent # CPU使用率
+        float32 memory_percent # 内存使用率
+        float32 memory_total # 内存总大小
+        float32 memory_available # 内存可用量
+        float64 net_sent # 网络发送数据总量 1MB=8Mb
+        float64 net_recv # 网络数据接收总量 MB
+        """
+        # 从库中获取
+        cpu_percent = psutil.cpu_percent()
+        memory_info = psutil.virtual_memory()
+        net_io_counters = psutil.net_io_counters()
+
+        # 组装消息
+        msg = SystemStatus()
+        msg.stamp = self.get_clock().now().to_msg()
+        msg.host_name = platform.node()
+        msg.cpu_percent = cpu_percent
+        msg.memory_percent = memory_info.percent 
+        msg.memory_total = memory_info.total / 1024 / 1024
+        msg.memory_available = memory_info.available /1024 / 1024
+        msg.net_sent = net_io_counters.bytes_sent / 1024 / 1024
+        msg.net_recv = net_io_counters.bytes_recv / 1024 / 1024
+
+        self.get_logger().info(f'发布：{str(msg)}')
+        self.status_publisher_.publish(msg)
+
+def main():
+    rclpy.init()
+    node = SysStatusPub('sys_status_pub')
+    rclpy.spin(node)
+    rclpy.shutdown()
+```
+```bash
+colcon build
+source install/setup.bash
+ros2 run status_publisher sys_status_pub
+```
+Qt是跨平台的可视化工具  
+```bash
+ros2 pkg create status_display --build-type ament_cmake --dependencies rclcpp status_interfaces --license Apache-2.0
+```
+```C++
+#include <QApplication>
+#include <QLabel>
+#include <QString>
+
+int main(int argc, char** argv){
+    QApplication app(argc, argv);
+    QLabel* label = new QLabel();
+    QString message = QString::fromStdString("Hello Qt!");
+    // 将文本放入label
+    label->setText(message);
+    // 此时label可以展示了 但是要通过app去调用
+    label->show();
+    // 执行应用  不断循环，阻塞代码
+    app.exec();
+    return 0;
+}
+```
+![Qt]()

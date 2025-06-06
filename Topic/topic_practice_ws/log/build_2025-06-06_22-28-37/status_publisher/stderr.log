@@ -1,0 +1,5 @@
+  File "/home/duan/Code/Duan-Ros2/Topic/topic_practice_ws/install/status_publisher/lib/python3.10/site-packages/status_publisher/sys_status_pub.py", line 9
+    self.status_publisher_ := self.create_publisher(
+    ^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: cannot use assignment expressions with attribute
+
