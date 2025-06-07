@@ -782,3 +782,360 @@ source install/setup.bash
 ros2 run status_display hello_qt5
 ```
 ![Qt](./Image/8.png)  
+订阅数据并用Qt显示  
+注意C++代码使用到了智能指针，以及线程使用的巧妙之处  
+```C++
+#include <QApplication>
+#include <QLabel>
+#include <QString>
+#include <rclcpp/rclcpp.hpp>
+#include <status_interfaces/msg/system_status.hpp>  // 自定义消息接口
+
+using SystemStatus = status_interfaces::msg::SystemStatus;
+
+class SysStatusDisplay : public rclcpp::Node{
+private:
+    rclcpp::Subscription<SystemStatus>::SharedPtr subscriber_;
+    std::shared_ptr<QLabel> label_;
+public:
+    SysStatusDisplay() : Node("sys_status_display"){
+        label_ = std::make_shared<QLabel>();
+        // topic要和发布者保持一致 不然接收不到消息
+        subscriber_ = this->create_subscription<SystemStatus>("sys_status", 10, [&](const SystemStatus::SharedPtr msg) -> void {
+            label_->setText(get_qstr_from_msg(msg));
+        });
+        label_->setText(get_qstr_from_msg(
+            std::make_shared<SystemStatus>()
+        ));
+        label_->show();
+    }
+
+    // # 组装消息
+    //     msg = SystemStatus()
+    //     msg.stamp = self.get_clock().now().to_msg()
+    //     msg.host_name = platform.node()
+    //     msg.cpu_percent = cpu_percent
+    //     msg.memory_percent = memory_info.percent 
+    //     msg.memory_total = memory_info.total / 1024 / 1024
+    //     msg.memory_available = memory_info.available /1024 / 1024
+    //     msg.net_sent = net_io_counters.bytes_sent / 1024 / 1024
+    //     msg.net_recv = net_io_counters.bytes_recv / 1024 / 1024
+
+    QString get_qstr_from_msg(const SystemStatus::SharedPtr msg){
+        std::stringstream show_str;
+        // 先输入一行进去    /t 让不同字段间保持统一的缩进  %表示普通字符 无特殊格式意义
+        show_str << "=========端======状态可视化显示工具======菲～=========\n" << 
+        "数 据 时 间:\t" << msg->stamp.sec << "\ts\n" << 
+        "主 机 名 字:\t" << msg->host_name << "\t\n" <<
+        "CPU 使用率:\t" << msg->cpu_percent << "\t%\n" <<
+        "内存使用率:\t" << msg->memory_percent << "\t%\n" <<
+        "内存总大小:\t" << msg->memory_total << "\tMB\n" <<
+        "剩余有效内存:\t" << msg->memory_available << "\tMB\n" <<
+        "网络发送量:\t" << msg->net_sent << "\tMB\n" <<
+        "网络发送量:\t" << msg->net_recv << "\tMB\n"
+        << "===========================================";
+        return QString::fromStdString(show_str.str());
+    }
+};
+
+int main(int argc, char** argv){
+    rclcpp::init(argc, argv);
+    QApplication app(argc, argv);
+    // 这里不可以这样写 因为无论是spin放在前面  还是exec放在前面 都会将代码阻塞 达不到预期效果
+    /* auto node = std::make_shared<SysStatusDisplay>();
+    rclcpp::spin(node);
+    // 执行应用  不断循环，阻塞代码
+    app.exec(); */
+    auto node = std::make_shared<SysStatusDisplay>();
+    // 这里采用多线程去执行
+    std::thread spin_thread([&]() -> void {
+                            {
+                                rclcpp::spin(node);
+                            }
+    });
+    // 防止线程在上面等待执行  阻塞   应该使用detach
+    spin_thread.detach();
+    // 这里Qt就可以正常显示出来了
+    app.exec();
+    rclcpp::shutdown();
+    return 0;
+}
+```
+```bash
+colcon build
+source install/setup.bash
+# 开启订阅节点
+ros2 run status_display sys_status_display
+# 再打开一个终端
+source install/setup.bash
+# 开启发布节点
+ros2 run status_publisher sys_status_pub
+效果展示:
+![系统信息](./Video/sys_status_display.gif)
+```
+# 服务通信介绍 
+服务是双向通信，是有结果的话题
+```bash
+# 在小海龟模拟器中再产生一个小海龟
+ros2 run turtlesim turtlesim_node
+# 展示一下都有什么服务
+ros2 run service list -t
+# 查看turtlesim/srv/Spawn接口都有什么参数
+ros2 interface show turtlesim/srv/Spawn
+# service call 请求服务
+# /spawn 服务名字
+# turtlesim/srv/Spawn "{x: 1, y: 1}消息接口和具体参数
+ros2 service call /spawn turtlesim/srv/Spawn "{x: 1, y: 1}"
+# 会得到一个响应
+```
+效果展示：  
+![两只小海龟](./Image/10.png)  
+基于服务的参数通信  
+参数被视为节点的设置，是基于服务通信实现的  
+```bash
+# 查看都有哪些带参数的服务
+ros2 service list -t | grep parameter
+# 查看具体都有哪些参数
+ros2 param list
+# 查看参数的描述
+ros2 param describe /turtlesim background_r
+# 查看某个具体参数的值
+ros2 param get /turtlesim background_r
+```
+![参数相关](./Image/11.png)  
+修改参数的值  
+```bash
+# 修改参数的值
+ros2 param set /turtlesim background_r 255
+```
+![修改参数](./Image/12.png)  
+把参数信息输出到一个文件中  
+```bash
+# 因为是信息yaml格式 所以输出到yaml文件中
+ros2 param dump /turtlesim > turtle_param.yaml
+# 后续可以直接调用yaml文件去开启小海龟
+# --ros-args --param-file会用给argc argv
+ros2 run turtlesim turtlesim_node --ros-args --param-file turtle_param.yaml
+# 可以查看有什么方法  使用rqt也可以通过图形化界面去修改参数
+ros2 param --help
+```
+接下来在程序中使用服务和参数进行通信  
+Python服务通信，实现人脸检测  
+需求：创建一个人脸检测服务，提供图像，返回人脸数量位置信息  
+难点分析：  
+1.人脸怎么识别？face_recognition  
+2.图片数据和结果怎么传递？服务通信就很合适  
+3.没有合适的消息接口？自定义一个  
+自定义服务接口  
+```bash
+sensor_msgs/Image image  # 原始图像
+---
+int16 number  # 人脸个数
+float32 use_time  # 识别耗时
+int32[] top # ；人脸在图像中位置
+int32[] right
+int32[] bottom
+int32[] left
+```
+```bash
+mkdir Service
+mkdir -p service_ws/src
+ros2 pkg create ser_interfaces --build-type ament_cmake --dependencies sensor_msgs rosidl_default_generators --license Apache-2.0
+```
+```bash
+colcon build
+source install/setup.bash
+# 生成的库就在install目录下
+# 检测一下
+ros2 interface show ser_interfaces/srv/FaceDetector
+```
+Python人脸检测
+```bash
+# 安装人脸识别库
+pip3 install face_recognition -i https://pypi.tuna.tsinghua.edu.cn/simple
+ros2 pkg create demo_python_service --build-type ament_python --dependencies rclpy ser_interfaces --license Apache-2.0
+# 示例图片在resource目录下
+```
+```python
+import face_recognition
+import cv2
+from ament_index_python.packages import get_package_share_directory # 获取 ROS2 功能包的共享目录路径
+import os
+
+def main():
+    # 获取图片真实路径
+    default_image_path = os.path.join(get_package_share_directory('demo_python_service'), 'resource/default.jpg')
+    print(f"图片真实路径:{default_image_path}")
+    # 使用cv2来加载图片
+    image = cv2.imread(default_image_path)
+    # 检测人脸
+    face_locations = face_recognition.face_locations(image, number_of_times_to_upsample=1, model='hog')
+    # 绘制人脸框
+    for top, right, bottom, left in face_locations:
+        # 给左上角 右下角  框框颜色  宽度
+        cv2.rectangle(image, (left, top), (right, bottom), (0, 255, 0), 4)
+    
+    # 保持宽高比，根据屏幕大小自动计算合适的尺寸
+    max_width = 800
+    max_height = 600
+    # 计算宽高比
+    height, width = image.shape[:2]
+    ratio = min(max_width/width, max_height/height)
+    # 计算新尺寸
+    new_width = int(width * ratio)
+    new_height = int(height * ratio)
+    dim = (new_width, new_height)
+    # 执行缩放
+    image = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
+
+    # 结果显示
+    cv2.imshow('Face Detect Result', image)
+    cv2.waitKey(0)
+```
+效果展示：  
+![人脸识别](./Image/13.png)
+上述只是一个人脸识别的小示例，接下来继续学习使用服务和参数进行通信  
+两种图片格式  
+```bash
+ROS  <===  CV BRIDGE  ===> OPENCV
+```
+服务实现步骤： 
+创建服务，接收请求Request  
+调用face_recognition识别  
+处理识别结果合成Response返回  
+```python
+import rclpy
+from rclpy.node import Node
+from ser_interfaces.srv import FaceDetector
+import face_recognition
+import cv2
+from ament_index_python.packages import get_package_share_directory # 获取 ROS2 功能包的共享目录路径
+import os
+from cv_bridge import CvBridge  # 转图像格式的库
+import time
+
+class FaceDetectNode(Node):
+    def __init__(self):
+        super().__init__('face_detect_node')
+        self.service_ = self.create_service(FaceDetector, 'face_detect', self.detect_face_callback)
+        self.bridge = CvBridge()
+        self.number_of_times_to_upsample = 1 
+        self.model = 'hog'
+        self.default_image_path = os.path.join(get_package_share_directory
+        ('demo_python_service'), 'resource/default.jpg')
+        self.get_logger().info("人脸检测服务已经启动!")
+
+    def detect_face_callback(self, request, response):
+        # 考虑程序的健壮性 if else一下
+        if request.image.data:
+            cv_image = self.bridge.imgmsg_to_cv2(request.image)
+        else:
+            cv_image = cv2.imread(self.default_image_path)
+            self.get_logger().info(f"传入图像为空，使用默认图像！")
+        # cv_image已经是一个opencv格式的图像了
+        start_time = time.time()
+        self.get_logger().info(f"加载完图像，开始识别！")
+        face_locations = face_recognition.face_locations(cv_image, 
+            number_of_times_to_upsample=self.number_of_times_to_upsample, model=self.model)
+        response.use_time = time.time() - start_time
+        response.number = len(face_locations)
+
+        for top, right, bottom, left in face_locations:
+            response.top.append(right)
+            response.right.append(right)
+            response.bottom.append(bottom)
+            response.left.append(left)
+
+        return response  # 必须返回response
+
+def main():
+    rclpy.init()
+    node = FaceDetectNode()
+    rclpy.spin(node)
+    rclpy.shutdown()
+```
+```bash
+# 检测服务有没有启动
+colcon build
+source install/setup.bash
+ros2 run demo_python_service face_detect_node
+# 再开启一个终端
+ros2 service list -t
+```
+![人脸检测服务启动](./Image/14.png)  
+客户端实现步骤：  
+创建服务客户端  
+构造Request，发送请求  
+处理返回的Response，绘制人脸显示  
+```python
+import rclpy
+from rclpy.node import Node
+from ser_interfaces.srv import FaceDetector
+import face_recognition
+import cv2
+from ament_index_python.packages import get_package_share_directory # 获取 ROS2 功能包的共享目录路径
+import os
+from cv_bridge import CvBridge  # 转图像格式的库
+import time
+
+class FaceDetectClientNode(Node):
+    def __init__(self):
+        super().__init__('face_detect_client_node')
+        self.bridge = CvBridge()
+        self.default_image_path = os.path.join(get_package_share_directory
+        ('demo_python_service'), 'resource/test1.jpg')
+        self.get_logger().info("人脸检测客户端已经启动!")
+        self.client = self.create_client(FaceDetector, 'face_detect')
+        self.image = cv2.imread(self.default_image_path)
+
+    def send_request(self):
+        # 1.判断服务端是否在线 这个服务有没有上线
+        # 等待超时时间
+        while self.client.wait_for_service(timeout_sec=1.0) is False:
+            self.get_logger().info('等待服务端上线')
+        # 2.构造Request
+        request = FaceDetector.Request()
+        request.image = self.bridge.cv2_to_imgmsg(self.image)
+        # 3.发送请求并等待处理完成
+        # 创建服务请求并异步获取结果
+        # 现在future中并没有包含response result  所以这个单词也有未来的意思
+        # 需要等待服务端处理完成才会把结果放在future中
+        future = self.client.call_async(request)
+        # # 目前程序是单线程，所以程序会死睡在这里
+        # # 造成当前线程无法再来接收来自服务端的返回
+        # # 导致永远无法完成
+        # while not future.done():
+        #     time.sleep(1.0)  # 休眠当前线程
+
+        # ros2对这个问题有处理
+        # 在后台边去接收结果  边去等待
+        # rclpy.spin_until_future_complete(self, future)  # 等待服务端返回响应
+        # 另一种写法 防止spin阻塞
+        def result_callback(result_future):
+            response = future.result() # 获取响应
+            self.get_logger().info(f'接收到响应，共检测到有{response.number}张人脸，耗时{response.use_time}s')
+            self.show_response(response)
+
+        future.add_done_callback(
+            result_callback
+        )
+
+    def show_response(self, response):
+        for i in range(response.number):
+            top = response.top[i]
+            right = response.right[i]
+            bottom = response.bottom[i]
+            left = response.left[i]
+            cv2.rectangle(self.image, (left, top), (right, bottom), (0, 255, 0), 4)
+        cv2.imshow('Face Detect Result', self.image)
+        cv2.waitKey(0) # 也是阻塞的 会导致spin无法正常运行
+        # 但是这里是只发送一次请求，所以不影响 最终卡在这里也没关系
+        # 但是在以后的代码中，如果需要发送多次请求，就需要注意一下
+
+def main():
+    rclpy.init()
+    node = FaceDetectClientNode()
+    node.send_request()
+    rclpy.spin(node)
+    rclpy.shutdown()
+```

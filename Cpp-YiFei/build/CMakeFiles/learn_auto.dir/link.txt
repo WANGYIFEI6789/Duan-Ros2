@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/learn_auto.dir/learn_auto.cpp.o -o learn_auto 

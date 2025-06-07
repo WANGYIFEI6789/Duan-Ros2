@@ -1,6 +1,0 @@
-{
-  "package_name": "status_interfaces",
-  "non_idl_tuples": [
-    "/root/Code/duan/Topic/topic_practice_ws/src/status_interfaces:msg/SystemStatus.msg"
-  ]
-}
