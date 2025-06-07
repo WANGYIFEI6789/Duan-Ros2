@@ -870,9 +870,9 @@ ros2 run status_display sys_status_display
 source install/setup.bash
 # 开启发布节点
 ros2 run status_publisher sys_status_pub
-效果展示:
-![系统信息](./Video/sys_status_display.gif)
 ```
+效果展示:  
+![系统信息](./Video/sys_status_display.gif)
 # 服务通信介绍 
 服务是双向通信，是有结果的话题
 ```bash
@@ -993,9 +993,9 @@ def main():
     cv2.waitKey(0)
 ```
 效果展示：  
-![人脸识别](./Image/13.png)
+![人脸识别](./Image/13.png)  
 上述只是一个人脸识别的小示例，接下来继续学习使用服务和参数进行通信  
-两种图片格式  
+两种图片格式  ROS  OPENCV 
 ```bash
 ROS  <===  CV BRIDGE  ===> OPENCV
 ```
