@@ -1139,3 +1139,502 @@ def main():
     rclpy.spin(node)
     rclpy.shutdown()
 ```
+C++服务通信，做个巡逻保安海龟  
+需求：让小海龟在模拟器中随机游走进行巡逻  
+分析：  
+1.控制海龟到达目标点我知道，怎么改成动态接收？服务  
+2.用什么接口？自定义的  
+3.随机游走？客户端来产生随机点，请求巡逻服务  
+大致逻辑就是：客户端生成目标点请求巡逻，服务端通过话题规划路线，驾驶小海龟到目标点，并且返回响应给客户端，所以设计到了服务通信和话题通信  
+自定义服务接口
+```srv
+float32 target_x
+float32 target_y
+---
+int8 SUCCESS=1
+int8 FAIL=0
+int8 result # 结果，SUCCESS / FAIL
+```
+C++服务端代码实现  
+```bash
+# 创建功能包
+ros2 pkg create demo_cpp_service --build-type ament_cmake --dependencies ser_interfaces rclcpp geometry_msgs turtlesim --license Apache-2.0
+```
+1.创建服务  
+2.接收目标点并赋值  
+```C++
+#include "rclcpp/rclcpp.hpp"
+#include "geometry_msgs/msg/twist.hpp"  // 需要控制小海龟 所以需要这个头文件
+#include <chrono>
+#include "turtlesim/msg/pose.hpp"
+#include "ser_interfaces/srv/patrol.hpp"
+
+using Patrol = ser_interfaces::srv::Patrol;
+
+using namespace std::chrono_literals;  // 对秒数进行自动转换
+
+class TurtleControlNode : public rclcpp::Node{
+public:
+    // explicit关键字 强制要求显式调用构造函数进行对象初始化
+    explicit TurtleControlNode(const std::string& node_name) : Node(node_name){
+        patrol_service_ = this->create_service<Patrol>("patrol", [&](const 
+        Patrol::Request::SharedPtr request, Patrol::Response::SharedPtr response) -> void{
+            if(
+                (request->target_x > 0 && request->target_x < 12.0f) &&
+                (request->target_y > 0 && request->target_y < 12.0f)
+            ){
+                this->target_x_ = request->target_x;
+                this->target_y_ = request->target_y;
+                response->result = Patrol::Response::SUCCESS;
+            }
+            else{
+                response->result = Patrol::Response::FAIL;
+            }
+            
+        });
+        publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/turtle1/cmd_vel", 10);
+        // 订阅别人的话题 所以名字必须是这个话题的名字
+        // 回调函数的参数就是收到的数据 参数：收到数据的共享指针
+        // 如果非要写成类成员函数 就需要通过std::bind 转为函数对象
+        subscriber_ = this->create_subscription<turtlesim::msg::Pose>("/turtle1/pose", 10, [&](const turtlesim::msg::Pose::SharedPtr pose){
+            // TODO 
+            // 根据当前位置 和 目标位置  计算出新的线速度和角速度
+            // 终端下 可以通过ros2 interface show turtlesim/msg/Pose 查看接口定义
+            // 1.获取当前的位置
+            auto cur_x = pose->x;
+            auto cur_y = pose->y;
+            RCLCPP_INFO(get_logger(), "当前: x=%f,y=%f", cur_x, cur_y);
+            // 2.计算当前小海龟位置跟目标位置之间的距离差和角度差
+            auto distance = std::sqrt(
+                (target_x_ - cur_x) * (target_x_ - cur_x) + 
+                (target_y_ - cur_y) * (target_y_ - cur_y)
+            );
+            // atan2 = arctan  可以求出角度
+            // 计算角度差
+            auto angle = std::atan2((target_y_ - cur_y), (target_x_ - cur_x)) - pose->theta;
+            // 3.控制策略
+            auto msg = geometry_msgs::msg::Twist();
+
+            // 距离 > 0.1  角度差 > 0.2 才作出控制 否则直接向前就好了
+            if(distance > 0.1){
+                if(fabs(angle) > 0.2){
+                    // 角度差太大了 需要原地转一下
+                    msg.angular.z = fabs(angle);
+                }
+                else{
+                    // 否则直接走
+                    msg.linear.x = k_ * distance;
+                }
+            }
+
+            // 限制线速度最大值
+            if(msg.linear.x > max_speed_){
+                msg.linear.x = max_speed_;
+            }
+            
+            // 再把控制的消息发布出去
+            // 这里相当于订阅节点用来获取位置，发布节点通过计算 将控制消息发布出去
+            publisher_->publish(msg);
+        });
+    }
+private:
+    // 模板类的智能指针   发布者的智能指针  后续需要赋值
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_;
+    // 同理 订阅者
+    rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr subscriber_;
+    // 服务
+    rclcpp::Service<Patrol>::SharedPtr patrol_service_;
+    // 目标位置 C++11 引入统一初始化方式{}
+    double target_x_{1.0};
+    double target_y_{1.0};
+    // 比例系数
+    double k_{1.0};
+    // 最大速度  限制速度大小
+    double max_speed_{3.0};
+};
+
+int main(int argc, char** argv){
+    rclcpp::init(argc, argv);
+    auto node = std::make_shared<TurtleControlNode>("turtle_control");
+    // 运行节点
+    rclcpp::spin(node);
+    rclcpp::shutdown();
+    return 0;
+}
+```
+做个验证  
+```bash
+ros2 run turtlesim turtlesim_node
+source install/setup.bash
+ros2 run demo_cpp_service turtle_control
+# 这里通过rqt去给位置  就不输命令行了
+rqt
+```
+![rqt验证Patrol](./Image/15.png)  
+C++客户端代码实现  
+实现步骤：  
+1.创建客户端和定时器  
+2.定时产生目标点并请求服务端巡逻  
+```C++
+#include "rclcpp/rclcpp.hpp"
+#include "ser_interfaces/srv/patrol.hpp"
+#include <chrono>
+#include <ctime> // 产生随机数
+using Patrol = ser_interfaces::srv::Patrol;
+using namespace std::chrono_literals;  // 使用10s 100ms 表示时间
+
+class PatrolClient : public rclcpp::Node{
+public:
+    PatrolClient() : Node("turtle_controller"){
+        patrol_client_ = this->create_client<Patrol>("patrol");
+        timer_ = this->create_wall_timer(5s, [&]() -> void{
+            // 1.检测服务端是否上线
+            while(!this->patrol_client_->wait_for_service(1s)){
+                if(!rclcpp::ok()){
+                    RCLCPP_ERROR(this->get_logger(), "等待服务上线过程中，rclcpp挂了，我退下了");
+                    return;
+                }
+                RCLCPP_INFO(this->get_logger(), "等待服务上线中......");
+                // 在这里初始化一下随机数种子
+                srand(time(NULL));
+            }
+            // 2.构造请求对象
+            auto request = std::make_shared<Patrol::Request>();
+            // 需要产生随机数
+            request->target_x = rand() % 15;
+            request->target_y = rand() % 15;
+            RCLCPP_INFO(this->get_logger(), "已准备好目标点%f, %f", request->target_x, request->target_y);
+            // 3.发送请求
+            // 异步发送
+            this->patrol_client_->async_send_request(request, [&]
+            (rclcpp::Client<Patrol>::SharedFuture result_future) -> void{
+                auto response = result_future.get();
+                if(response->result == Patrol::Response::SUCCESS){
+                    RCLCPP_INFO(this->get_logger(), "请求巡逻目标点成功");
+                }
+                if(response->result == Patrol::Response::FAIL){
+                    RCLCPP_INFO(this->get_logger(), "请求巡逻目标点失败");
+                }
+            });
+        });
+    }
+private:
+    // 定时器  需要定时给一个位置 和 请求服务
+    rclcpp::TimerBase::SharedPtr timer_;
+    // 创建一个客户端
+    rclcpp::Client<Patrol>::SharedPtr patrol_client_;
+};
+
+int main(int argc, char** argv){
+    rclcpp::init(argc, argv);
+    auto node = std::make_shared<PatrolClient>();
+    rclcpp::spin(node);
+    rclcpp::shutdown();
+    return 0;
+}
+```
+验证效果：  
+```bash
+# 打开小海龟模拟器
+ros2 run turtlesim turtlesim_node
+# 启动服务端
+ros2 run demo_cpp_service turtle_control
+# 启动客户端
+ros2 run demo_cpp_service patrol_client
+```
+效果展示：  
+![小海龟巡逻](./Video/patrol.gif)  
+参数通信  
+在Python节点中使用参数，把人脸检测参数改为ROS2参数实现方法  
+修改代码如下，使用declare_parameter即可  
+```python
+self.declare_parameter('number_of_times_to_upsample', 1)
+self.declare_parameter('model', 'hog')
+self.number_of_times_to_upsample = self.get_parameter\
+('number_of_times_to_upsample').value
+self.model = self.get_parameter('model').value
+```
+```bash
+ros2 run demo_python_service face_detect_node
+ros2 param list
+ros2 param set /face_detect_node number_of_times_to_upsample 2
+ros2 param get /face_detect_node number_of_times_to_upsample
+ros2 param set /face_detect_node model cnn
+ros2 param get /face_detect_node model cnn
+```
+```bash
+# 启动节点的时候可以手动设置参数的值
+ros2 run demo_python_service face_detect_node --ros-args -p model:=cnn
+```
+所以参数通信是基于服务通信的  
+上述的参数设置只能修改参数一次，需要重新设置的时候就要再次启动节点进行输入，很不方便  
+所以引入订阅参数更新 原理相当于服务通信，服务端回调函数，当收到客户端setParam请求时自动调用该回调函数处理  
+```python
+# 这一行写在构造函数中
+self.add_on_set_parameters_callback(self.parameters_callback)
+
+def parameters_callback(self, parameters):
+        for parameter in parameters:
+            self.get_logger().info(f"{parameter.name}->{parameter.value}")
+            if(parameter.name == 'number_of_times_to_upsample'):
+                self.number_of_times_to_upsample = parameter.value
+            if(parameter.name == 'model'):
+                self.model = parameter.value
+        return SetParametersResult(success=True)
+```
+同时客户端节点可以设置服务端节点的参数值，服务端节点也可以自己设置自己的参数值  
+C++参数声明与设置  
+将巡逻海龟项目服务端中控制器的比例系数k_和最大速度max_speed_进行参数化  
+```C++
+// 在节点构造函数中添加
+// 声明参数 并给出默认值
+this->declare_parameter("k", 1.0);
+this->declare_parameter("max_speed", 1.0);
+// 获取参数 将获取到的参数赋值给k_ max_speed_这两个成员变量
+this->get_parameter("k", k_);
+this->get_parameter("max_speed", max_speed_);
+```
+```bash
+# 启动节点
+ros2 run demo_cpp_service turtle_control
+# 查看启动的节点都有什么参数
+ros2 param list
+```
+![参数](./Image/16.png)  
+只更改参数的值，不会实际更改类中成员变量的值，要想修改，就需要有一个接收参数的事件，进而执行回调函数进行更新  
+```C++
+OnSetParametersCallbackHandle::SharedPtr parameter_callback_;
+parameter_callback_ = this->add_on_set_parameters_callback([&](const std::vector<rclcpp::Parameter>& parameters) -> SetParametersResult{
+    SetParametersResult result;
+    result.successful = true;
+    for(const auto& parameter : parameters){
+    // 写代码的时候要经常加一些打印日志
+        RCLCPP_INFO(this->get_logger(), "更新参数的值%s=%f", parameter.get_name().c_str(), parameter.as_double());
+        if(parameter.get_name() == "k"){
+            k_ = parameter.as_double();
+        }
+        if(parameter.get_name() == "max_speed"){
+            max_speed_ = parameter.as_double();
+        }
+    }
+    return result;
+});
+```
+![利用rqt修改](./Image/17.png)
+![日志输出](./Image/18.png)  
+```C++
+// 节点内部自己修改自己的值
+this->set_parameter(rclcpp::Parameter("k", 2.0));
+```
+修改其他节点的参数  
+```C++
+// 要做到实时修改参数，就需要包括以下几个头文件
+// 可以通过ros2 interface show rcl_interfaces/srv/SetParameters查看都需要包括哪些头文件
+#include "rcl_interfaces/msg/parameter.hpp"  
+#include "rcl_interfaces/msg/parameter_value.hpp"
+#include "rcl_interfaces/msg/parameter_type.hpp"
+#include "rcl_interfaces/srv/set_parameters.hpp"
+```
+想通过客户端去修改服务端的参数值，这些是可以复用的代码，以后想修改其他的，加上对应的函数即可  
+```C++
+/*
+    创建客户端发送请求，返回结果
+    */
+    SetP::Response::SharedPtr call_set_parameters(rcl_interfaces::msg::Parameter &param){
+        auto param_client = this->create_client<SetP>("/turtle_control/set_parameters");
+        // 1.检测服务端是否上线
+        while(!param_client->wait_for_service(1s)){
+            if(!rclcpp::ok()){
+                RCLCPP_ERROR(this->get_logger(), "等待服务上线过程中，rclcpp挂了，我退下了");
+                return nullptr;
+            }
+            RCLCPP_INFO(this->get_logger(), "等待服务上线中......");
+        }
+        // 2.构造请求对象
+        auto request = std::make_shared<SetP::Request>();
+        request->parameters.push_back(param);
+        // 3.发送请求
+        // 异步发送
+        auto future = param_client->async_send_request(request);
+        rclcpp::spin_until_future_complete(this->get_node_base_interface(), future);
+        auto response = future.get();
+        return response;
+    }
+
+    /*
+    更新参数k
+    */
+    void update_server_param_k(double k){
+        // 1.创建参数对象
+        auto param = rcl_interfaces::msg::Parameter();
+        param.name = "k";
+        // 2.创建参数值
+        auto param_value = rcl_interfaces::msg::ParameterValue();
+        param_value.type = rcl_interfaces::msg::ParameterType::PARAMETER_DOUBLE;
+        param_value.double_value = k;
+        param.value = param_value;
+        // 3.请求更新参数并处理
+        auto response = this->call_set_parameters(param);
+        if(response == NULL){
+            RCLCPP_INFO(this->get_logger(), "参数更新失败");
+            return;
+        }
+        for(auto result : response->results){
+            if(result.successful == false){
+                RCLCPP_INFO(this->get_logger(), "参数更新失败：%s", result.reason.c_str());
+
+            }
+            else{
+                RCLCPP_INFO(this->get_logger(), "参数更新成功");
+            }
+        }
+    }
+```
+```bash
+# 验证
+# 启动服务端
+ros2 run demo_cpp_service turtle_control
+# 启动客户端
+ros2 run demo_cpp_service patrol_client
+```
+![客户端](./Image/19.png)
+![服务端](./Image/20.png)  
+使用launch启动脚本  
+在之前我们启动小海龟模拟器、服务端节点、客户端节点需要打开三个终端分别去启动，也需要分别去关闭，ros2提供了launch来启动多个节点  
+ros2提供了三种编写launch文件的方法，分别为Python、XML以及YAML，官方推荐使用Python  
+在功能包下面新建一个文件夹 launch 文件夹下的文件以 .launch.py为后缀  
+```python
+import launch
+import launch_ros
+
+def generate_launch_description():
+    """产生launch描述"""
+    action_node_turtlesim_node = launch_ros.actions.Node(
+        package='turtlesim',
+        executable='turtlesim_node',
+        output='screen'
+    )
+
+    action_node_patrol_client = launch_ros.actions.Node(
+        package='demo_cpp_service',
+        executable='patrol_client',
+        output='log'
+    )
+
+    action_node_turtle_control = launch_ros.actions.Node(
+        package='demo_cpp_service',
+        executable='turtle_control',
+        output='both'
+    )
+
+    return launch.LaunchDescription([
+        # actions 动作
+        action_node_turtlesim_node,
+        action_node_patrol_client,
+        action_node_turtle_control,
+    ])
+# 不要忘记安装在install目录下 还需要再去编写一下CMakeLists
+"""
+install(DIRECTORY launch
+DESTINATION share/${PROJECT_NAME}
+)
+"""
+```
+```bash
+source install/setup.bash
+ros2 launch demo_cpp_service demo.launch.py
+```
+我们在启动节点的时候可以通过--ros-args去传递参数  
+launch中想要传递参数，需要像下面这样去写  
+```python
+import launch
+import launch_ros
+
+def generate_launch_description():
+    # 1.声明一个launch参数
+    action_declare_arg_background_g = launch.actions.DeclareLaunchArgument\
+    ('launch_arg_bg', default_value='150')
+    # 2.把launch的参数手动传递给某个节点
+
+    """产生launch描述"""
+    action_node_turtlesim_node = launch_ros.actions.Node(
+        package='turtlesim',
+        executable='turtlesim_node',
+        parameters=[{'background_g': launch.substitutions.LaunchConfiguration('launch_arg_bg', default='150')}],
+        output='screen'
+    )
+
+    action_node_patrol_client = launch_ros.actions.Node(
+        package='demo_cpp_service',
+        executable='patrol_client',
+        output='log'
+    )
+
+    action_node_turtle_control = launch_ros.actions.Node(
+        package='demo_cpp_service',
+        executable='turtle_control',
+        output='both'
+    )
+
+    return launch.LaunchDescription([
+        # actions 动作
+        action_declare_arg_background_g,
+        action_node_turtlesim_node,
+        action_node_patrol_client,
+        action_node_turtle_control,
+    ])
+```
+```bash
+# --debug可以将日志打印出来 方便以后查找错误
+ros2 launch demo_cpp_service demo.launch.py launch_arg_bg:=0 --debug
+```
+launch使用进阶  
+Launch三大组件：动作、条件和替换  
+动作：除了是一个节点外，还可以是一句打印，一句终端指令，甚至可以是另一个launch文件  
+替换：使用launch的参数替换节点的参数值  
+条件：利用条件可以决定哪些动作启动，哪些不启动，相当于if  
+```bash
+ros2 launch actions.launch.py
+```
+```python
+import launch
+import launch.launch_description_sources
+import launch_ros
+from ament_index_python.packages import get_package_share_directory
+
+def generate_launch_description():
+    action_declare_startup_rqt = launch.actions.DeclareLaunchArgument\
+    ('startup_rqt', default_value='False')
+    startup_rqt = launch.substitutions.LaunchConfiguration('startup_rqt', default='False')
+    # 动作1-启动其他launch
+    multisim_launch_path = [get_package_share_directory('turtlesim'),'/launch/','multisim.launch.py']
+    action_include_launch = launch.actions.IncludeLaunchDescription(
+        launch.launch_description_sources.PythonLaunchDescriptionSource(
+            multisim_launch_path
+        )
+    )
+
+    # 动作2-打印数据
+    action_log_info = launch.actions.LogInfo(msg=str(multisim_launch_path))
+
+    # 动作3-执行进程，其实就是执行一个命令行 ros2 run topic list
+    action_topic_list = launch.actions.ExecuteProcess(
+        # cmd=['ros2', 'topci', 'list'],
+        # output='screen',
+        condition=launch.conditions.IfCondition(startup_rqt),
+        cmd=['rqt'],
+    )
+
+    # 动作4-组织动作成组，把多个动作放到一组
+    action_group = launch.actions.GroupAction([
+        # 动作5-定时器
+        launch.actions.TimerAction(period=2.0, actions=[action_include_launch]),
+        launch.actions.TimerAction(period=4.0, actions=[action_topic_list])
+    ])
+
+    return launch.LaunchDescription([
+        # actions 动作
+        action_log_info,
+        action_group,
+    ])
+```
