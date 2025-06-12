@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="duanbot">
+
+<!-- 基础部分/身体部分 -->
+<xacro:include filename="$(find duanbot_description)/urdf/duanbot/base.urdf.xacro"/>
+<!-- 传感器部分 -->
+<xacro:include filename="$(find duanbot_description)/urdf/duanbot/sensor/imu.urdf.xacro"/>
+<xacro:include filename="$(find duanbot_description)/urdf/duanbot/sensor/camera.urdf.xacro"/>
+<xacro:include filename="$(find duanbot_description)/urdf/duanbot/sensor/laser.urdf.xacro"/>
+<!-- 执行器部分 -->
+<xacro:include filename="$(find duanbot_description)/urdf/duanbot/actuator/wheel.urdf.xacro"/>
+<xacro:include filename="$(find duanbot_description)/urdf/duanbot/actuator/caster.urdf.xacro"/>
+
+<xacro:base_xacro length="0.12" radius="0.10" />
+<xacro:imu_xacro xyz="0.0 0.0 0.2" />
+<xacro:camera_xacro xyz="0.10 0.0 0.075" />
+<xacro:laser_xacro xyz="0.0 0.0 0.10" />
+
+<xacro:wheel_xacro wheel_name="left_wheel" xyz="0 0.10 -0.06"/>
+<xacro:wheel_xacro wheel_name="right_wheel" xyz="0 -0.10 -0.06"/>
+<xacro:caster_xacro caster_name="front_caster" xyz="0.08 0.0 -0.076"/>
+<xacro:caster_xacro caster_name="back_caster" xyz="-0.08 0.0 -0.076"/>
+</robot>

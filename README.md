@@ -1749,3 +1749,288 @@ ros2 topic echo /tf_static
 ros2 run tf2_ros tf2_echo base_link base_camera
 ```
 ![订阅结果](./Image/25.png)  
+通过Python发布动态TF  
+```python
+import rclpy
+from rclpy.node import Node
+from tf2_ros import TransformBroadcaster # 静态坐标发布器 是一个类
+from geometry_msgs.msg import TransformStamped # 消息接口
+from tf_transformations import quaternion_from_euler # 欧拉角转四元素
+
+class DynamicTFBroadcaster(Node):
+    def __init__(self):
+        super().__init__('dynamic_tf_broadcaster')
+        # 需要通过静态坐标发布器去发布坐标
+        self.dynamic_broadcaster_ = TransformBroadcaster(self)
+        # 1秒发送100次
+        self.timer_ = self.create_timer(0.01, self.publish_dynamic_tf)
+
+    def publish_dynamic_tf(self):
+        """
+        发布动态TF 从 camera_link到bottle_link之间的坐标关系
+        """
+        transform = TransformStamped()
+        transform.header.frame_id = 'camera_link'
+        transform.child_frame_id = 'bottle_link'
+        transform.header.stamp = self.get_clock().now().to_msg()
+        
+        transform.transform.translation.x = 0.2
+        transform.transform.translation.y = 0.3
+        transform.transform.translation.z = 0.5
+
+        # 欧拉角转为四元素
+        # 先转为弧度 再转为四元素
+        # q为数组  q = x y z w
+        q = quaternion_from_euler(0, 0, 0)
+        # 旋转部分进行赋值
+        transform.transform.rotation.x = q[0]
+        transform.transform.rotation.y = q[1]
+        transform.transform.rotation.z = q[2]
+        transform.transform.rotation.w = q[3]
+
+        # 将静态坐标关系发布出去
+        self.dynamic_broadcaster_.sendTransform(transform)
+        self.get_logger().info(f'发布动态TF:{transform}')
+
+def main():
+    rclpy.init()
+    node = DynamicTFBroadcaster()
+    rclpy.spin(node)
+    rclpy.shutdown()
+```
+```bash
+ros2 run demo_python_tf dynamic_tf_broadcaster
+# 查看动态tf频率
+ros2 topic hz /tf
+# 查看camera_link bottle_link的关系
+ros2 run tf2_ros tf2_echo camera_link bottle_link
+```
+Python查询TF关系  
+```python
+import rclpy
+from rclpy.node import Node
+import rclpy.time
+from tf2_ros import TransformListener, Buffer # 坐标监听器
+from tf_transformations import euler_from_quaternion # 四元素转欧拉角
+import math # 角度转弧度
+
+class DynamicTFBroadcaster(Node):
+    def __init__(self):
+        super().__init__('tf_listener')
+        self.buffer_ = Buffer()
+        self.listener_ = TransformListener(self.buffer_, self)
+        self.timer_ = self.create_timer(1.0, self.get_transform)
+
+    def get_transform(self):
+        """
+        实时查询坐标关系
+        """
+        try:
+            result = self.buffer_.lookup_transform('base_link', 'bottle_link', 
+                    rclpy.time.Time(seconds=0), rclpy.time.Duration(seconds=1.0))
+            transform = result.transform
+            self.get_logger().info(f'平移:{transform.translation}')
+            self.get_logger().info(f'旋转:{transform.rotation}')
+            rotation_euler = euler_from_quaternion([
+                transform.rotation.x,
+                transform.rotation.y,
+                transform.rotation.z,
+                transform.rotation.w]
+            )
+            self.get_logger().info(f'旋转RPY:{rotation_euler}')
+            
+        except Exception as e:
+            self.get_logger().warn(f'获取坐标变换失败:原因{str(e)}')
+
+def main():
+    rclpy.init()
+    node = DynamicTFBroadcaster()
+    rclpy.spin(node)
+    rclpy.shutdown()
+```
+```bash
+# 依次开启
+ros2 run demo_python_tf static_tf_broadcaster
+ros2 run demo_python_tf dynamic_tf_broadcaster
+ros2 run demo_python_tf tf_listener
+```
+接下来是C++版本  
+常见可视化工具rqt与RViz  
+```bash
+# 安装插件
+sudo apt install ros-$ROS_DISTRO-rqt-tf-tree -y
+# 更新配置文件
+rm -rf ~/.config/ros.org/rqt_gui.ini
+```
+数据可视化工具RViz  
+```bash
+rviz2
+```
+![rviz2](./Image/26.png)  
+数据记录工具ros2 bag  
+将话题上的数据记录并保存下来，需要的时候播放数据然后进行数据的分析  
+```bash
+# 常用操作
+# 记录
+ros2 bag record /turtle1/cmd_vel
+# 播放
+ros2 bag play rosbag2_xxx
+# 打开小海龟模拟器  
+ros2 run turtlesim turtlesim_node
+ros2 topic list
+# 通过键盘控制小海龟
+# 这个节点会发布一个topic /turtle1/cmd_vel
+# 小海龟节点会订阅这个topic  
+ros2 run turtlesim turtle_teleop_key
+# 记录这个topic  
+ros2 bag record /turtle1/cmd_vel
+```
+![录包](./Image/27.png)  
+```bash
+# 播包
+ros2 bag play rosbag2_2025_06_10-22_12_48/
+# 小海龟会像上次一样行动
+```
+```bash
+sudo apt install liburdfdom-tools
+```
+# 仿真
+将算法和程序部署到真正的机器人之前，往往先会采用仿真的机器人进行验证，在此之前需要先对机器人进行建模  
+移动机器人结构  
+![robot](./Image/28.png)  
+使用URDF创建机器人  
+URDF使用XML(Extensible Markup Language，可扩展标记语言)来描述机器人的几何结构、传感器和执行器等信息  
+```urdf
+<?xml version="1.0"?>
+<robot name="first_robot">
+    <!-- 机器人的身体部分 -->
+    <link name="base_link">
+        <!-- 部件的外观描述 -->
+        <visual>
+            <!-- 沿着自己几何中心的偏移和旋转 -->
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <!-- 几何形状 -->
+            <geometry>
+                <!-- 圆柱体 radius 半径 0.10m  高度 0.12m-->
+                <cylinder radius="0.10" length="0.12"/>
+            </geometry>
+            <!-- 材质颜色 -->
+            <material name="white">
+                <color rgba="1.0 1.0 1.0 0.5"/>
+            </material>
+        </visual>
+    </link>
+
+    <!-- 机器人的IMU部件，惯性测量传感器 -->
+    <link name="imu_link">
+        <!-- 部件的外观描述 -->
+        <visual>
+            <!-- 沿着自己几何中心的偏移和旋转 -->
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <!-- 几何形状 -->
+            <geometry>
+                <!-- 圆柱体 radius 半径 0.10m  高度 0.12m-->
+                <box size="0.02 0.02 0.02"/>
+            </geometry>
+            <!-- 材质颜色 -->
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 0.5"/>
+            </material>
+        </visual>
+    </link>
+
+    <!-- 机器人的关节，用于组合机器人的部件 -->
+    <joint name="imu_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="imu_link"/>
+        <origin xyz="0.0 0.0 0.03" rpy="0.0 0.0 0.0"/>
+    </joint>
+</robot>
+```
+```bash
+urdf_to_graphviz first_robot.urdf
+```
+![结构可视化](./Image/29.png)  
+在RViz中显示机器人  
+```bash
+# 安装两个节点
+sudo apt install ros-$ROS_DISTRO-joint-state-publisher
+sudo apt install ros-$ROS_DISTRO-robot-state-publisher
+```
+```bash
+ros2 launch display_robot.launch.py --debug
+```
+使用Xacro简化URDF  
+Xacro是基于XML的宏语言，用于简化URDF文件的创建和维护，使用它可以将部件等定义为宏，在需要使用的时候进行调用即可  
+```xacro
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="first_robot">
+    <xacro:macro name="base_link" params="length radius">
+        <link name="base_link">
+            <!-- 部件的外观描述 -->
+            <visual>
+                <!-- 沿着自己几何中心的偏移和旋转 -->
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- 几何形状 -->
+                <geometry>
+                    <!-- 圆柱体 radius 半径 0.10m  高度 0.12m-->
+                    <cylinder radius="${radius}" length="${length}"/>
+                </geometry>
+                <!-- 材质颜色 -->
+                <material name="white">
+                    <color rgba="1.0 1.0 1.0 0.5"/>
+                </material>
+            </visual>
+        </link>
+    </xacro:macro>
+    <!-- 机器人的身体部分 -->
+    
+    <xacro:macro name="imu_link" params="imu_name xyz">
+        <!-- 机器人的IMU部件，惯性测量传感器 -->
+        <link name="${imu_name}_link">
+            <!-- 部件的外观描述 -->
+            <visual>
+                <!-- 沿着自己几何中心的偏移和旋转 -->
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <!-- 几何形状 -->
+                <geometry>
+                    <!-- 圆柱体 radius 半径 0.10m  高度 0.12m-->
+                    <box size="0.02 0.02 0.02"/>
+                </geometry>
+                <!-- 材质颜色 -->
+                <material name="black">
+                    <color rgba="0.0 0.0 0.0 0.5"/>
+                </material>
+            </visual>
+        </link>
+        <!-- 机器人的关节，用于组合机器人的部件 -->
+        <joint name="${imu_name}_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="${imu_name}_link"/>
+            <origin xyz="${xyz}" rpy="0.0 0.0 0.0"/>
+        </joint>    
+    </xacro:macro>
+
+    <xacro:base_link length="0.12" radius="0.1"/>
+    <xacro:imu_link imu_name="imu_up" xyz="0.0 0.0 0.03"/>
+    <xacro:imu_link imu_name="imu_down" xyz="0.0 0.0 -0.03"/> 
+
+</robot>
+```
+```bash
+# xacro ---> urdf
+sudo apt install ros-$ROS_DISTRO-xacro
+xacro /home/duan/Code/Duan-Ros2/Simulation/sim_ws/src/duanbot_description/urdf/fisrt_robot.xacro
+```
+```bash
+colcon build
+source install/setup.bash
+ros2 launch duanbot_description display_robot.launch.py model:=/home/duan/Code/Duan-Ros2/Simulation/sim_ws/src/duanbot_description/urdf/fisrt_robot.xacro
+```
+![xacro](./Image/31.png)  
+因此xacro可以通过宏批量生成许多部件  
+
+创建机器人及其传感器部件  
+![duanbot](./Image/32.png)  
+完善机器人执行部件 执行器主动轮 + 从动轮  
+![duanbot](./Image/33.png)  
