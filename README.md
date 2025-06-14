@@ -2036,3 +2036,216 @@ ros2 launch duanbot_description display_robot.launch.py model:=/home/duan/Code/D
 ![duanbot](./Image/32.png)  
 完善机器人执行部件 执行器主动轮 + 从动轮  
 ![duanbot](./Image/33.png)  
+贴合地面，添加虚拟部件  
+![贴合地面](./Image/34.png)  
+添加物理属性让机器人更真实  
+```xml
+<!-- 类似这样，为每一个部件都添加碰撞检测 -->
+<collision>
+    <!-- 沿着自己几何中心的偏移和旋转 -->
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <!-- 几何形状 -->
+    <geometry>
+    <!-- 圆柱体 radius 半径 0.10m  高度 0.12m-->
+        <cylinder radius="${radius}" length="${length}"/>
+    </geometry>
+                <!-- 材质颜色 -->
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 0.5"/>
+    </material>
+</collision>
+```
+为机器人部件添加质量与惯性  
+真实的机器人部件肯定是有质量的，既然有质量，那么在运动的时候就会有惯性。质量可以直接使用多少千克表示，而旋转惯性则需要使用一个3×3的矩阵表示  
+```XML
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:macro name="box_inertia" params="m w h d">
+        <inertial>
+            <mass value="${m}" />
+            <inertia ixx="${(m/12) * (h*h + d*d)}" ixy="0.0" ixz="0.0" iyy="${(m/12) * (w*w + d*d)}" iyz="0.0" izz="${(m/12) * (w*w + h*h)}" />
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_inertia" params="m r h">
+        <inertial>
+            <mass value="${m}" />
+            <inertia ixx="${(m/12) * (3*r*r + h*h)}" ixy="0" ixz="0" iyy="${(m/12) * (3*r*r + h*h)}" iyz="0" izz="${(m/2) * (r*r)}" />
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="sphere_inertia" params="m r">
+        <inertial>
+            <mass value="${m}" />
+            <inertia ixx="${(2/5) * m * (r*r)}" ixy="0.0" ixz="0.0" iyy="${(2/5) * m * (r*r)}" iyz="0.0" izz="${(2/5) * m * (r*r)}" />
+        </inertial>
+    </xacro:macro>
+
+</robot>
+```
+```xml
+<!-- 惯性矩阵 -->
+<!-- base -->
+<xacro:cylinder_inertia m="1.0" r="${radius}" h="${length}" />
+<!-- wheel -->
+<xacro:cylinder_inertia m="0.05" r="${radius}" h="${length}" />
+<!-- caster -->
+<xacro:sphere_inertia m="0.05" r="0.016" />
+<!-- camera -->
+<xacro:box_inertia m="0.1" w="0.02" h="0.10" d="0.02" />
+<!-- imu -->
+<xacro:box_inertia m="0.05" w="0.02" h="0.02" d="0.02" />
+<!-- laser -->
+<xacro:cylinder_inertia m="0.05" r="0.01" h="0.10" />
+<xacro:cylinder_inertia m="0.10" r="0.02" h="0.02" />
+```
+![质量视图](./Image/35.png)  
+![惯性视图](./Image/36.png)  
+在Gazebo中完成机器人仿真  
+安装与使用Gazebo构建世界  
+```bash
+sudo apt install gazebo
+mkdir -p ~/.gazebo
+cd ~/.gazebo
+git clone https://gitee.com/ohhuo/gazebo_models.git
+~/.gazebo/models
+rm -rf ~/.gazebo/models/.git
+```
+Gazebo使用的是sdf格式，而我们的机器人建模使用的是URDF,所以要想在Gazebo中显示机器人模型，就需要将URDF转换成sdf。不用操心如何转换，因为ROS2提供了
+一些功能包，可以帮助我们直接实现这一转换。  
+```bash
+sudo apt install ros-$ROS_DISTRO-gazebo-ros-pkgs
+```
+```bash
+# 启动launch的同时 加载gazebo
+ros2 launch duanbot_description gazebo_sim.launch.py
+```
+![加载gazebo](./Image/37.png)  
+使用gazebo标签扩展urdf  
+```xml
+<gazebo reference="${wheel_name}_link">
+    <!-- 主要摩擦力 与地面的摩擦式 -->
+    <mu1 value="20.0"/>
+    <!-- 次要摩擦力 侧向滑动 -->
+    <mu2 value="20.0"/>
+    <!-- 接触刚度 -->
+    <kp value="1000000000.0"/>
+    <!-- 接触阻尼 类似于减震器 -->
+    <kd value="1.0"/>
+</gazebo>
+
+<!-- 设置颜色 -->
+<gazebo reference="laser_link">
+    <material>Gazebo/Black</material>
+</gazebo> 
+```
+使用两轮差速插件控制机器人  
+```xml
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="gazebo_control_plugin">
+        <gazebo>
+            <!-- 加载Gazebo的ROS2 差速驱动插件 -->
+            <!-- 这个插件负责将 ROS 2 的速度指令转换为轮子的运动，并计算里程计 -->
+            <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
+                <ros>
+                    <namespace>/</namespace>
+                    <remapping>cmd_vel:=cmd_vel</remapping>
+                    <remapping>odom:=odom</remapping>
+                </ros>
+                <update_rate>30</update_rate>
+                <!-- wheels -->
+                <!-- 指定左右轮的关节名称（需与 URDF 中定义的一致）-->
+                <left_joint>left_wheel_joint</left_joint>
+                <right_joint>right_wheel_joint</right_joint>
+                <!-- kinematics -->
+                <wheel_separation>0.2</wheel_separation>
+                <wheel_diameter>0.064</wheel_diameter>
+                <!-- limits -->
+                <max_wheel_torque>20</max_wheel_torque>
+                <max_wheel_acceleration>1.0</max_wheel_acceleration>
+                <!-- output -->
+                <!-- 里程计发布配置 -->
+                <publish_odom>true</publish_odom>
+                <publish_odom_tf>true</publish_odom_tf>
+                <publish_wheel_tf>true</publish_wheel_tf>
+
+                <odometry_frame>odom</odometry_frame>
+                <robot_base_frame>base_footprint</robot_base_frame>
+            </plugin>
+        </gazebo>
+   </xacro:macro>
+</robot>
+```
+```python
+# launch文件
+import launch
+import launch.launch_description_sources
+import launch_ros # ros2启动系统的核心模块
+from ament_index_python.packages import get_package_share_directory # 获取功能包的安装路径 安装是通过CMakeLists
+import os
+
+import launch_ros.parameter_descriptions # 用于处理参数值的特殊类型
+
+def generate_launch_description():
+    # 获取功能包share路径
+    urdf_package_path = get_package_share_directory('duanbot_description')
+    # 机器人模型文件
+    default_xacro_path = os.path.join(urdf_package_path, 'urdf', 'duanbot/duanbot.urdf.xacro')
+    # default_rviz_config_path = os.path.join(urdf_package_path, 'config', 'display_robot_model.rviz')
+    # 仿真世界文件
+    default_gazebo_world_path = os.path.join(urdf_package_path, 'world', 'custom_room.world')
+    # 声明一个urdf目录的参数 方便修改
+    action_declare_arg_mode_path = launch.actions.DeclareLaunchArgument(
+        name='model', default_value=str(default_xacro_path), description='加载的模型文件路径'
+    )
+
+    # 通过文件路径获取内容并转换为参数值对象，以供传入 robot_state_publisher
+    substitutions_command_result = launch.substitutions.Command(['xacro ', launch.substitutions.LaunchConfiguration('model')])
+    robot_description_value = launch_ros.parameter_descriptions.ParameterValue(substitutions_command_result, value_type=str)
+
+    # 可视化和控制机器人
+    """
+    1.从 robot_description 参数获取完整的 URDF 模型
+    2.监听 /joint_states 话题（由关节控制器或模拟器发布）
+    3.根据接收到的关节位置（如 shoulder_pan_joint=0.5 弧度）
+    4.计算所有连杆和关节的位置和姿态
+    5.通过 /tf 和 /tf_static 话题发布 TF 变换树
+    """
+    action_robot_state_publisher = launch_ros.actions.Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        parameters=[{'robot_description':robot_description_value}]
+    )
+
+    # 启动gazebo
+    action_launch_gazebo = launch.actions.IncludeLaunchDescription(
+        launch.launch_description_sources.PythonLaunchDescriptionSource(
+            [get_package_share_directory('gazebo_ros'),'/launch','/gazebo.launch.py']
+        ),
+        launch_arguments=[('world', default_gazebo_world_path),('verbose','true')]
+    )
+
+    # 加载机器人到gazebo
+    action_spawn_entity = launch_ros.actions.Node(
+        package='gazebo_ros',
+        executable='spawn_entity.py',
+        arguments=['-topic','/robot_description','-entity','duanbot']
+    )
+
+    return launch.LaunchDescription([
+        action_declare_arg_mode_path,
+        action_robot_state_publisher,
+        action_launch_gazebo,
+        action_spawn_entity
+    ])
+```
+两轮差速插件工作流程：  
+1.接收速度指令：订阅 /cmd_vel 话题（类型：geometry_msgs/Twist）  
+2.运动学转换：将线速度和角速度转换为左右轮的转速  
+3.物理模拟：根据轮间距、直径等参数，在 Gazebo 中模拟轮子转动  
+4.里程计计算：根据轮子的实际运动，反向推算机器人的位姿  
+5.发布数据：  
+* 通过 /odom 话题发布里程计消息
+* 通过 TF 系统发布 odom → base_footprint 的坐标变换  
+![两轮差速插件](./Video/robot.gif)  
