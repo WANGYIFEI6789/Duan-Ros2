@@ -1,0 +1,77 @@
+[0.019s] Invoking command in '/home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/duan/Code/Duan-Ros2/duan-src/duan_ws/src/duanbot_description -DCMAKE_INSTALL_PREFIX=/home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description
+[0.070s] -- The C compiler identification is GNU 11.4.0
+[0.119s] -- The CXX compiler identification is GNU 11.4.0
+[0.126s] -- Detecting C compiler ABI info
+[0.192s] -- Detecting C compiler ABI info - done
+[0.197s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.197s] -- Detecting C compile features
+[0.197s] -- Detecting C compile features - done
+[0.199s] -- Detecting CXX compiler ABI info
+[0.289s] -- Detecting CXX compiler ABI info - done
+[0.291s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.291s] -- Detecting CXX compile features
+[0.292s] -- Detecting CXX compile features - done
+[0.294s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.417s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.499s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.564s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.567s] -- Added test 'lint_cmake' to check CMake code style
+[0.567s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.570s] -- Added test 'xmllint' to check XML markup files
+[0.571s] -- Configuring done
+[0.572s] -- Generating done
+[0.574s] -- Build files have been written to: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description
+[0.578s] Invoked command in '/home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/duan/Code/Duan-Ros2/duan-src/duan_ws/src/duanbot_description -DCMAKE_INSTALL_PREFIX=/home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description
+[0.580s] Invoking command in '/home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description -- -j8 -l8
+[0.618s] Invoked command in '/home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description -- -j8 -l8
+[0.635s] Invoking command in '/home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description
+[0.636s] -- Install configuration: ""
+[0.636s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/launch
+[0.636s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/launch/display_robot.launch.py
+[0.636s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/launch/gazebo_sim.launch.py
+[0.636s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/launch/__pycache__
+[0.636s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/launch/__pycache__/display_robot.launch.cpython-310.pyc
+[0.636s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf
+[0.637s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/first_robot.gv
+[0.638s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/first_robot.pdf
+[0.638s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/first_robot.urdf
+[0.639s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot
+[0.639s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/actuator
+[0.639s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/actuator/caster.urdf.xacro
+[0.639s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/actuator/wheel.urdf.xacro
+[0.639s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/duanbot.urdf.xacro
+[0.639s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/plugins
+[0.640s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/plugins/gazebo_control_plugin.xacro
+[0.640s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/plugins/gazebo_sensor_plugin.xacro
+[0.640s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/common_inertia.xacro
+[0.640s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/base.urdf.xacro
+[0.640s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/sensor
+[0.641s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/sensor/camera.urdf.xacro
+[0.641s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/sensor/laser.urdf.xacro
+[0.642s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/sensor/imu.urdf.xacro
+[0.642s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/duanbot/duanbot.ros2_control.xacro
+[0.642s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/urdf/fisrt_robot.xacro
+[0.642s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/config
+[0.644s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/config/display_robot_model.rviz
+[0.645s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/config/duanbot_ros2_controller.yaml
+[0.645s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/world
+[0.645s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/world/room
+[0.645s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/world/room/model.config
+[0.645s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/world/room/model.sdf
+[0.646s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/world/custom_room.world
+[0.646s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/ament_index/resource_index/package_run_dependencies/duanbot_description
+[0.646s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/ament_index/resource_index/parent_prefix_path/duanbot_description
+[0.646s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/environment/ament_prefix_path.sh
+[0.646s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/environment/ament_prefix_path.dsv
+[0.647s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/environment/path.sh
+[0.647s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/environment/path.dsv
+[0.647s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/local_setup.bash
+[0.647s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/local_setup.sh
+[0.647s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/local_setup.zsh
+[0.647s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/local_setup.dsv
+[0.647s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/package.dsv
+[0.648s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/ament_index/resource_index/packages/duanbot_description
+[0.648s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/cmake/duanbot_descriptionConfig.cmake
+[0.648s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/cmake/duanbot_descriptionConfig-version.cmake
+[0.648s] -- Installing: /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duanbot_description/share/duanbot_description/package.xml
+[0.652s] Invoked command in '/home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/duan/Code/Duan-Ros2/duan-src/duan_ws/build/duanbot_description

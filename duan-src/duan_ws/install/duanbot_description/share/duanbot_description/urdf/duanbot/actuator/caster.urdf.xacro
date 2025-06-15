@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:include filename="$(find duanbot_description)/urdf/duanbot/common_inertia.xacro"/>
+    <xacro:macro name="caster_xacro" params="caster_name xyz">
+        <!-- 机器人的IMU部件，惯性测量传感器 -->
+        <link name="${caster_name}_link">
+            <!-- 部件的外观描述 -->
+            <visual>
+                <!-- 沿着自己几何中心的偏移和旋转 -->
+                <origin xyz="0.0 0.0 0.0" rpy="1.57079 0.0 0.0"/>
+                <!-- 几何形状 -->
+                <geometry>
+                    <!-- 圆柱体 radius 半径 0.10m  高度 0.12m-->
+                    <sphere radius="0.016"/>
+                </geometry>
+                <!-- 材质颜色 -->
+                <material name="yellow">
+                    <color rgba="1.0 1.0 0.0 0.8"/>
+                </material>
+            </visual>
+            <collision>
+                <!-- 沿着自己几何中心的偏移和旋转 -->
+                <origin xyz="0.0 0.0 0.0" rpy="1.57079 0.0 0.0"/>
+                <!-- 几何形状 -->
+                <geometry>
+                    <!-- 圆柱体 radius 半径 0.10m  高度 0.12m-->
+                    <sphere radius="0.016"/>
+                </geometry>
+                <!-- 材质颜色 -->
+                <material name="yellow">
+                    <color rgba="1.0 1.0 0.0 0.8"/>
+                </material>
+            </collision>
+            <xacro:sphere_inertia m="0.05" r="0.016" />
+        </link>
+        <!-- 机器人的关节，用于组合机器人的部件 -->
+        <joint name="${caster_name}_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="${caster_name}_link"/>
+            <origin xyz="${xyz}" rpy="0.0 0.0 0.0"/>
+            <!-- 绕y轴旋转约90度 -->
+            <axis xyz="0 1 0"/>
+        </joint>   
+
+        <gazebo reference="${caster_name}_link">
+            <mu1 value="0.0"/>
+            <mu2 value="0.0"/>
+            <kp value="1000000000.0"/>
+            <kd value="1.0"/>
+        </gazebo>
+
+    </xacro:macro>
+
+</robot>
