@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- 定义了一个宏 -->
+    <xacro:macro name="duanbot_ros2_control">
+        <ros2_control name="DuanBotGazeboSystem" type="system">
+            <!-- 硬件系统 -->
+            <hardware>
+                <!-- 驱动库和驱动库的名字 -->
+                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            </hardware>
+            <!-- 驱动轮的名字 -->
+            <joint name="left_wheel_joint">
+                <!-- 速度接口 -->
+                <command_interface name="velocity">
+                    <param name="min">-1</param>
+                    <param name="max">1</param>
+                </command_interface>
+                <!-- 力接口 -->
+                <command_interface name="effort">
+                    <param name="min">-0.1</param>
+                    <param name="max">0.1</param>
+                </command_interface>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+                <state_interface name="effort" />
+            </joint>
+            <!-- 右轮同样如此 -->
+            <joint name="right_wheel_joint">
+                <command_interface name="velocity">
+                    <param name="min">-1</param>
+                    <param name="max">1</param>
+                </command_interface>
+                <command_interface name="effort">
+                    <param name="min">-0.1</param>
+                    <param name="max">0.1</param>
+                </command_interface>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+                <state_interface name="effort" />
+            </joint>
+        </ros2_control>
+    <gazebo>
+        <!-- gazebo加载相关插件和参数 参数在yaml文件中 -->
+        <!-- 会解析ros2_control标签的相关参数 -->
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <parameters>$(find duanbot_description)/config/duanbot_ros2_controller.yaml</parameters>
+            <ros>
+                <remapping>/duanbot_diff_drive_controller/odom:=/odom</remapping>
+                <remapping>/duanbot_diff_drive_controller/cmd_vel_unstamped:=/cmd_vel</remapping>
+            </ros>
+        </plugin>
+    </gazebo>
+    </xacro:macro>
+</robot>

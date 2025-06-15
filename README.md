@@ -2249,3 +2249,188 @@ def generate_launch_description():
 * 通过 /odom 话题发布里程计消息
 * 通过 TF 系统发布 odom → base_footprint 的坐标变换  
 ![两轮差速插件](./Video/robot.gif)  
+激光雷达传感器仿真  
+```xml
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="gazebo_sensor_plugin">
+    <!-- 雷达所对应关节的名字 -->
+        <gazebo reference="laser_link">
+        <!-- 传感器的名字 可以自己换名字 -->
+            <sensor name="laserscan" type="ray">
+                <!-- plugin标签 filename是插件名字 -->
+                <!-- 会解析下面这个标签的名字 存放在模拟器中 -->
+                <!-- 插件本质上也是代码 -->
+                <plugin name="laserscan" filename="libgazebo_ros_ray_sensor.so">
+                    <ros>
+                        <namespace>/</namespace>
+                        <remapping>~/out:=scan</remapping>
+                    </ros>
+                    <output_type>sensor_msgs/LaserScan</output_type>
+                    <frame_name>laser_link</frame_name>
+                </plugin>
+                <always_on>true</always_on>
+                <visualize>true</visualize>
+                <update_rate>5</update_rate>
+                <pose>0 0 0 0 0 0</pose>
+				<!-- 激光传感器配置 -->
+                <ray>
+                    <!-- 设置扫描范围 -->
+                    <scan>
+                        <horizontal>
+                            <samples>360</samples>
+                            <resolution>1.000000</resolution>
+                            <min_angle>0.000000</min_angle>
+                            <max_angle>6.280000</max_angle>
+                        </horizontal>
+                    </scan>
+                    <!-- 设置扫描距离 -->
+                    <range>
+                        <min>0.120000</min>
+                        <max>8.0</max>
+                        <resolution>0.015000</resolution>
+                    </range>
+                    <!-- 设置噪声 -->
+                    <!-- 目的接近真实的传感器 -->
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.01</stddev>
+                    </noise>
+                </ray>
+            </sensor>
+        </gazebo>
+   </xacro:macro>
+</robot>
+```
+![激光雷达仿真](./Image/38.png)  
+![激光雷达仿真](./Image/39.png)  
+在rviz中可视化激光雷达数据  
+![激光雷达可视化](./Image/40.png)  
+惯性测量传感器仿真  
+深度相机传感器仿真  
+![深度相机仿真](./Image/41.png)  
+在rviz中可视化  
+![rviz](./Image/43.png)  
+所有仿真完成后对应的topic列表  
+![topic列表](./Image/42.png)  
+使用ros2_control驱动机器人  
+插件模式架构  
+![插件架构](./Image/44.png)  
+```bash
+sudo apt install ros-$ROS_DISTRO-ros2-control
+ros2 control --help
+# 能看到帮助列表就算安装成功了
+sudo apt info ros-$ROS_DISTRO-ros2-controllers
+sudo apt install ros-$ROS_DISTRO-ros2-controllers
+# 接下来就能使用这些控制器对机器人进行控制  
+```
+使用Gazebo接入ros2_control  
+Gazebo接入ros2 control,其实就是让Gazebo按照ros2 control指定的接口提供数据。在ROS2中利用相应的Gazebo插件，可以方便的实现Gazebo和ros2_control的对接  
+```bash
+# 安装Gazebo ROS2 control插件
+sudo apt install ros-$ROS_DISTRO-gazebo-ros2-control
+```
+将仿真的、虚拟的硬件资源导出为状态接口和命令接口，让接口管理器进行管理，之后通过接口加载相关的插件，发送到topic  
+```bash
+# 列出当前系统中已经注册的所有控制器类型
+# 速度控制 力控制等等
+ros2 control list_controller_types
+# 列出硬件接口
+ros2 control list_hardware_interfaces
+# 列出硬件组建
+ros2 control list_hardware_components
+```
+![控制器类型](./Image/45.png)  
+![硬件接口](./Image/46.png)  
+![硬件组建](./Image/47.png)  
+使用关节状态发布控制器 发布关节的状态  
+```bash
+ros2 node info /robot_state_publisher
+# 可以发现这个节点订阅了/joint_states这个topic
+# 所以我们往这个topic发两个轮子的数据，它自然会把两个轮子的tf跟base_link之间的关系发布出去
+# joint_state_broadcaster/JointStateBroadcaster 会去发布话题
+```
+```yaml
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+    use_sim_time: true
+
+    duan_joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+```
+```bash
+# 加载和激活
+ros2 control load_controller duanbot_joint_state_broadcaster --set-state active
+```
+使用力控制器控制轮子  
+在duanbot_ros2_controller.yaml中配置完成后，记得在launch文件中启动，注意启动顺序  
+```bash
+ros2 topic list | grep effort
+ros2 topic list -t | grep effort
+# 给左轮右轮一个微小的力，看能否动起来
+ros2 topic pub /duanbot_effort_controller/commands std_msgs/msg/Float64MultiArray "{data: [0.0001, 0.0001]}"
+```
+使用两轮差速控制器控制机器人  
+状态发布控制器和力控制器只是对状态接口的简单调用，本节我们来学习如何使用两轮差速控制器，这个控制器相对而言要复杂很多，该控制器不仅仅是单纯的数据转发，还涉及到了运动学计算，从而得到里程计信息和两个轮子的目标速度  
+通过使用gazebo扩展标签，以及配置文件，生成对应的topic，再通过重映射
+```yaml
+        duanbot_diff_drive_controller:
+            # 控制器类型
+            type: diff_drive_controller/DiffDriveController
+duanbot_diff_drive_controller:
+  ros__parameters:
+    left_wheel_names: ["left_wheel_joint"]
+    right_wheel_names: ["right_wheel_joint"]
+
+    wheel_separation: 0.20
+    #wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
+    wheel_radius: 0.032
+
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
+    publish_rate: 50.0
+    odom_frame_id: odom
+    base_frame_id: base_footprint
+    pose_covariance_diagonal : [0.001, 0.001, 0.0, 0.0, 0.0, 0.01]
+    twist_covariance_diagonal: [0.001, 0.0, 0.0, 0.0, 0.0, 0.01]
+
+    open_loop: true
+    enable_odom_tf: true
+
+    cmd_vel_timeout: 0.5
+    #publish_limited_velocity: true
+    use_stamped_vel: false
+    #velocity_rolling_window_size: 10
+```
+```xml
+<ros>
+    <remapping>/duanbot_diff_drive_controller/odom:=/odom</remapping>
+    <remapping>/duanbot_diff_drive_controller/cmd_vel_unstamped:=/cmd_vel</remapping>
+</ros>
+```
+![两轮差速控制器](./Video/robot_cmd_vel.gif)  
+# 自主导航--让机器人自己动起来
+机器人导航介绍：  
+原始相机使用slam会有许多问题，比如偏差等等
+![原始相机](./Image/49.png)  
+slam可以分为激光slam和视觉slam  
+激光 SLAM 用激光雷达，成本高、抗光性强  
+视觉 SLAM 用摄像头，成本低、依赖光照  
+激光 SLAM 构建点云地图，定位靠点云匹配，精度高；视觉 SLAM 提取图像特征建图，定位易受动态物体和运动模糊影响  
+
+使用slam_toolbox完成建图  
+```bash
+# 安装建图工具
+sudo apt install ros-$ROS_DISTRO-slam-toolbox
+# 在线异步建图
+ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True
+```
+将地图保存为文件  
+```bash
+sudo apt install ros-$ROS_DISTRO-nav2-map-server
+ros2 run nav2_map_server map_saver_cli -f room
+```
