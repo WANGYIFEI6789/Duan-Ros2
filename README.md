@@ -2434,3 +2434,21 @@ ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True
 sudo apt install ros-$ROS_DISTRO-nav2-map-server
 ros2 run nav2_map_server map_saver_cli -f room
 ```
+![建图结果](./Image/51.png)  
+机器人导航框架 Naigation2 让机器人安全的从A点移动到B点(自主移动)    
+Navigation2安装
+```bash
+sudo apt install ros-$ROS_DISTRO-navigation2
+# 示例功能包
+sudo apt install ros-$ROS_DISTRO-nav2-bringup
+```
+配置Navigation2 参数  
+```bash
+cp /opt/ros/$ROS_DISTRO/share/nav2_bringup/params/nav2_params.yaml src/duanbot_navigation2/config
+```
+编写launch并启动导航  
+全局代价地图和局部代价地图 紫色很深的地方代表局部地图 颜色越深越危险  
+![代价地图](./Image/52.png)  
+进行单点和路点导航  
+![单点导航](./Video/single.gif)
+![路点导航](./Video/multi.gif)  
