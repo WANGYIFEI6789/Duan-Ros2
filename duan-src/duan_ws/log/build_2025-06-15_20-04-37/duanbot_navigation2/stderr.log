@@ -1,6 +1,0 @@
-[31mCMake Error at cmake_install.cmake:46 (file):
-  file INSTALL cannot find
-  "/home/duan/Code/Duan-Ros2/duan-src/duan_ws/src/duanbot_navigation2/map":
-  No such file or directory.
-
-[0m
