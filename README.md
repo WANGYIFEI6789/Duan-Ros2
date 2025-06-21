@@ -2452,3 +2452,477 @@ cp /opt/ros/$ROS_DISTRO/share/nav2_bringup/params/nav2_params.yaml src/duanbot_n
 进行单点和路点导航  
 ![单点导航](./Video/single.gif)
 ![路点导航](./Video/multi.gif)  
+优化导航速度和半径  
+可以在nav2_params.yaml中修改对应的参数  
+```bash
+colcon build
+source install/setup.bash
+ros2 launch duanbot_description gazebo_sim.launch.py
+ros2 launch duanbot_navigation2 navigation2.launch.py
+ros2 topic echo /cmd_vel
+```
+膨胀半径：是指障碍物在地图中向外扩展的膨胀层的半径，通过将障碍物的影响范围扩大到其实际边界之外，机器人在规划路径时会尽量避开这些膨胀后的区域，从而提高机器人运动的安全性和可靠性  
+例如，在一个机器人导航场景中，有一个实际半径为 0.2 米的圆柱型障碍物。如果设置膨胀半径为 0.5 米，那么在代价地图中，这个障碍物就会被视为一个半径为 0.5 米的更大的圆形区域，机器人在规划路径时就会避免进入这个半径为 0.5 米的圆形区域内  
+![膨胀半径](./Image/53.png)  
+```bash
+inflation_radius: 0.30
+```
+优化机器人到点精度  
+![到点精度](./Image/54.png)  
+```bash
+# 在nav2_params.yaml中修改
+xy_goal_tolerance: 0.15
+yaw_goal_tolerance: 0.15
+```
+
+使用话题初始化机器人位姿  
+```bash
+# 这个topic会订阅
+# /initialpose: geometry_msgs/msg/PoseWithCovarianceStamped
+# /map: nav_msgs/msg/OccupancyGrid
+# /scan: sensor_msgs/msg/LaserScan等话题
+ros2 node info /amcl
+# 往/initialpose发数据
+ros2 topic pub /initialpose geometry_msgs/msg/PoseWithCovarianceStamped "{header: {frame_id: map}}" --once
+```
+此时机器人位置已经初始化完成了  
+![初始化](./Image/55.png)  
+这样做的好处就是在关机前记录下机器人的位置，下次就可以通过话题进行恢复  
+```python
+from geometry_msgs.msg import PoseStamped
+from nav2_simple_commander.robot_navigator import BasicNavigator
+import rclpy
+
+def main():
+    rclpy.init()
+    nav = BasicNavigator()  # 节点
+    init_pose = PoseStamped()
+    """
+    frame_id 是 ROS 中坐标帧 Coordinate Frame 的标识符，用于指定数据所在的参考坐标系。
+    "map" 是导航系统中固定的全局参考坐标系，通常表示整个地图的原点。
+    这行代码表明初始位姿数据是相对于全局地图坐标系的
+    设置时间戳为当前时刻，确保位姿数据的时效性。
+    导航系统可能会忽略过时的位姿信息，因此时间戳很重要
+    """
+    init_pose.header.frame_id = "map"
+    init_pose.header.stamp = nav.get_clock().now().to_msg()
+    init_pose.pose.position.x = 0.0
+    init_pose.pose.position.y = 0.0
+    init_pose.pose.position.z = 0.0
+    init_pose.pose.orientation.w = 1.0
+    nav.setInitialPose(init_pose)
+    nav.waitUntilNav2Active()  # 等待导航可用
+    rclpy.spin(nav)
+    rclpy.shutdown()
+```
+使用TF获取机器人实时位置  
+```python
+import rclpy
+from rclpy.node import Node
+import rclpy.time
+from tf2_ros import TransformListener, Buffer # 坐标监听器
+from tf_transformations import euler_from_quaternion # 四元素转欧拉角
+import math # 角度转弧度
+
+class DynamicTFBroadcaster(Node):
+    def __init__(self):
+        super().__init__('tf_listener')
+        self.buffer_ = Buffer()
+        self.listener_ = TransformListener(self.buffer_, self)
+        self.timer_ = self.create_timer(1.0, self.get_transform)
+
+    def get_transform(self):
+        """
+        实时查询坐标关系
+        """
+        try:
+            result = self.buffer_.lookup_transform('map', 'base_footprint', 
+                    rclpy.time.Time(seconds=0), rclpy.time.Duration(seconds=1.0))
+            transform = result.transform
+            self.get_logger().info(f'平移:{transform.translation}')
+            self.get_logger().info(f'旋转:{transform.rotation}')
+            rotation_euler = euler_from_quaternion([
+                transform.rotation.x,
+                transform.rotation.y,
+                transform.rotation.z,
+                transform.rotation.w]
+            )
+            self.get_logger().info(f'旋转RPY:{rotation_euler}')
+            
+        except Exception as e:
+            self.get_logger().warn(f'获取坐标变换失败:原因{str(e)}')
+
+def main():
+    rclpy.init()
+    node = DynamicTFBroadcaster()
+    rclpy.spin(node)
+    rclpy.shutdown()
+```
+![rqt](./Image/56.png)  
+调用接口进行单点导航  
+```python
+from geometry_msgs.msg import PoseStamped
+from nav2_simple_commander.robot_navigator import BasicNavigator
+import rclpy
+
+def main():
+    rclpy.init()
+    nav = BasicNavigator()  # 节点
+    nav.waitUntilNav2Active()  # 等待导航可用
+    goal_pose = PoseStamped()
+    goal_pose.header.frame_id = "map"
+    goal_pose.header.stamp = nav.get_clock().now().to_msg()
+    goal_pose.pose.position.x = 2.0
+    goal_pose.pose.position.y = 1.0
+    goal_pose.pose.orientation.w = 1.0
+    nav.goToPose(goal_pose)
+    while not nav.isTaskComplete():
+        feedback = nav.getFeedback()
+        nav.get_logger().info(f'剩余距离:{feedback.distance_remaining}')
+        # nav.cancelTask()
+    result = nav.getResult()
+    nav.get_logger().info(f'导航结果:{result}')
+```
+使用接口完成路点导航  
+```python
+from geometry_msgs.msg import PoseStamped
+from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
+import rclpy
+from rclpy.duration import Duration
+
+def main():
+    rclpy.init()
+    navigator = BasicNavigator()
+    navigator.waitUntilNav2Active()
+    # 创建点集
+    goal_poses = []
+    goal_pose1 = PoseStamped()
+    goal_pose1.header.frame_id = 'map'
+    goal_pose1.header.stamp = navigator.get_clock().now().to_msg()
+    goal_pose1.pose.position.x = 0.0
+    goal_pose1.pose.position.y = 0.0
+    goal_pose1.pose.orientation.w = 1.0
+    goal_poses.append(goal_pose1)
+    goal_pose2 = PoseStamped()
+    goal_pose2.header.frame_id = 'map'
+    goal_pose2.header.stamp = navigator.get_clock().now().to_msg()
+    goal_pose2.pose.position.x = 2.0
+    goal_pose2.pose.position.y = 0.0
+    goal_pose2.pose.orientation.w = 1.0
+    goal_poses.append(goal_pose2)
+    goal_pose3 = PoseStamped()
+    goal_pose3.header.frame_id = 'map'
+    goal_pose3.header.stamp = navigator.get_clock().now().to_msg()
+    goal_pose3.pose.position.x = 2.0
+    goal_pose3.pose.position.y = 2.0
+    goal_pose3.pose.orientation.w = 1.0
+    goal_poses.append(goal_pose3)
+    # 调用路点导航服务
+    navigator.followWaypoints(goal_poses)
+    # 判断结束及获取反馈
+    while not navigator.isTaskComplete():
+        feedback = navigator.getFeedback()
+        navigator.get_logger().info(
+            f'当前目标编号：{feedback.current_waypoint}')
+    # 最终结果判断
+    result = navigator.getResult()
+    if result == TaskResult.SUCCEEDED:
+        navigator.get_logger().info('导航结果：成功')
+    elif result == TaskResult.CANCELED:
+        navigator.get_logger().warn('导航结果：被取消')
+    elif result == TaskResult.FAILED:
+        navigator.get_logger().error('导航结果：失败')
+    else:
+        navigator.get_logger().error('导航结果：返回状态无效')
+
+if __name__ == '__main__':
+    main()
+```
+
+自动巡检机器人  
+需求：  
+* 巡检机器人能够在不同的目标点之间进行循环移动  
+* 到达每个目标点时播放对应的语音提示  
+* 到达目标点时，通过摄像头拍摄实时图像并保存到本地  
+机器人系统架构设计  
+![架构图](./Image/57.png)  
+```bash
+ros2 pkg create duan_autopatrol_robot --build-type ament_python --dependencies rclpy nav2  nav2_simple_commander --license Apache-2.0
+```
+```bash
+# 创建消息接口
+ros2 pkg create autopatrol_interface --dependencies rosidl_default_generators
+```
+```srv
+string text
+---
+bool result
+```
+巡航节点  
+```python
+import rclpy
+from geometry_msgs.msg import PoseStamped, Pose
+from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
+from tf2_ros import TransformListener, Buffer
+from tf_transformations import euler_from_quaternion, quaternion_from_euler
+from rclpy.duration import Duration
+# 添加服务接口
+from autopatrol_interface.srv import SpeechText
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge # 图像格式转换
+import cv2
+
+class DuanPatrolNode(BasicNavigator):
+    def __init__(self, node_name='patrol_node'):
+        super().__init__(node_name)
+        # 导航相关定义
+        self.declare_parameter('initial_point', [0.0, 0.0, 0.0])
+        self.declare_parameter('target_points', [0.0, 0.0, 0.0, 1.0, 1.0, 1.57])
+        self.initial_point_ = self.get_parameter('initial_point').value
+        self.target_points_ = self.get_parameter('target_points').value
+        # 实时位置获取 TF 相关定义
+        self.buffer_ = Buffer()
+        self.listener_ = TransformListener(self.buffer_, self)
+        self.speach_client_ = self.create_client(SpeechText, 'speech_text')
+
+        # 订阅与保存图像相关定义
+        self.declare_parameter('image_save_path', '')
+        self.image_save_path = self.get_parameter('image_save_path').value
+        self.bridge = CvBridge()
+        self.latest_image = None
+        self.subscription_image = self.create_subscription(
+            Image, '/camera_sensor/image_raw', self.image_callback, 10)
+
+    def image_callback(self, msg):
+        """
+        将最新的消息放到 latest_image 中
+        """
+        self.latest_image = msg
+
+    def record_image(self):
+        """
+        记录图像
+        """
+        if self.latest_image is not None:
+          pose = self.get_current_pose()
+          cv_image = self.bridge.imgmsg_to_cv2(self.latest_image)
+          cv2.imwrite(f'{self.image_save_path}image_{pose.translation.x:3.2f}_{pose.translation.y:3.2f}.png', cv_image)
+
+
+    def speach_text(self, text):
+        """
+        调用服务播放语音
+        """
+        while not self.speach_client_.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('语合成服务未上线，等待中...')
+
+        request = SpeechText.Request()
+        request.text = text
+        future = self.speach_client_.call_async(request)
+        rclpy.spin_until_future_complete(self, future)
+        if future.result() is not None:
+            result = future.result().result
+            if result:
+                self.get_logger().info(f'语音合成成功：{text}')
+            else:
+                self.get_logger().warn(f'语音合成失败：{text}')
+        else:
+            self.get_logger().warn('语音合成服务请求失败')
+
+    def get_pose_by_xyyaw(self, x, y, yaw):
+        """
+        通过 x,y,yaw 合成 PoseStamped
+        """
+        pose = PoseStamped()
+        pose.header.frame_id = 'map'
+        pose.pose.position.x = x
+        pose.pose.position.y = y
+        rotation_quat = quaternion_from_euler(0, 0, yaw)
+        pose.pose.orientation.x = rotation_quat[0]
+        pose.pose.orientation.y = rotation_quat[1]
+        pose.pose.orientation.z = rotation_quat[2]
+        pose.pose.orientation.w = rotation_quat[3]
+        return pose
+
+    def init_robot_pose(self):
+        """
+        初始化机器人位姿
+        """
+        # 从参数获取初始化点
+        self.initial_point_ = self.get_parameter('initial_point').value
+        # 合成位姿并进行初始化
+        self.setInitialPose(self.get_pose_by_xyyaw(
+            self.initial_point_[0], self.initial_point_[1], self.initial_point_[2]))
+        # 等待直到导航激活
+        self.waitUntilNav2Active()
+
+    def get_target_points(self):
+        """
+        通过参数值获取目标点集合        
+        """
+        points = []
+        self.target_points_ = self.get_parameter('target_points').value
+        for index in range(int(len(self.target_points_)/3)):
+            x = self.target_points_[index*3]
+            y = self.target_points_[index*3+1]
+            yaw = self.target_points_[index*3+2]
+            points.append([x, y, yaw])
+            self.get_logger().info(f'获取到目标点: {index}->({x},{y},{yaw})')
+        return points
+
+    def nav_to_pose(self, target_pose):
+        """
+        导航到指定位姿
+        """
+        self.waitUntilNav2Active()
+        result = self.goToPose(target_pose)
+        while not self.isTaskComplete():
+            feedback = self.getFeedback()
+            if feedback:
+                self.get_logger().info(f'预计: {Duration.from_msg(feedback.estimated_time_remaining).nanoseconds / 1e9} s 后到达')
+        # 最终结果判断
+        result = self.getResult()
+        if result == TaskResult.SUCCEEDED:
+            self.get_logger().info('导航结果：成功')
+        elif result == TaskResult.CANCELED:
+            self.get_logger().warn('导航结果：被取消')
+        elif result == TaskResult.FAILED:
+            self.get_logger().error('导航结果：失败')
+        else:
+            self.get_logger().error('导航结果：返回状态无效')
+
+    def get_current_pose(self):
+        """
+        通过TF获取当前位姿
+        """
+        while rclpy.ok():
+            try:
+                tf = self.buffer_.lookup_transform(
+                    'map', 'base_footprint', rclpy.time.Time(seconds=0), rclpy.time.Duration(seconds=1))
+                transform = tf.transform
+                rotation_euler = euler_from_quaternion([
+                    transform.rotation.x,
+                    transform.rotation.y,
+                    transform.rotation.z,
+                    transform.rotation.w
+                ])
+                self.get_logger().info(
+                    f'平移:{transform.translation},旋转四元数:{transform.rotation}:旋转欧拉角:{rotation_euler}')
+                return transform
+            except Exception as e:
+                self.get_logger().warn(f'不能够获取坐标变换，原因: {str(e)}')
+    
+def main():
+    rclpy.init()
+    patrol = DuanPatrolNode()
+    patrol.speach_text(text='正在初始化位置')
+    patrol.init_robot_pose()
+    patrol.speach_text(text='位置初始化完成')
+
+    while rclpy.ok():
+        for point in patrol.get_target_points():
+            x, y, yaw = point[0], point[1], point[2]
+            # 导航到目标点
+            target_pose = patrol.get_pose_by_xyyaw(x, y, yaw)
+            patrol.speach_text(text=f'准备前往目标点{x},{y}')
+            patrol.nav_to_pose(target_pose)
+            patrol.speach_text(text=f"已到达目标点{x},{y},准备记录图像")
+            patrol.record_image()
+            patrol.speach_text(text=f"图像记录完成")
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
+自动生成yaml文件  
+```bash
+colcon build
+source install/setup.bash
+ros2 run duan_autopatrol_robot patrol_node 
+ros2 param dump /patrol_node
+```
+```yaml
+/patrol_node:
+  ros__parameters:
+    init_point: [0.0, 0.0, 0.0]
+    target_points: [
+        0.0, 0.0, 0.0,
+        1.0, 2.0, 3.14,
+        -4.5, 1.5, 1.57,
+        -8.0, -5.0, 1.57,
+        1.0, -5.0, 3.14
+    ]
+    use_sim_time: false
+```
+语音播报服务  
+```python
+import rclpy
+from rclpy.node import Node
+from autopatrol_interface.srv import SpeechText
+import espeakng
+
+class Speaker(Node):
+    def __init__(self, node_name):
+        super().__init__(node_name)
+        self.speech_service = self.create_service(
+            SpeechText, 'speech_text', self.speak_text_callback)
+        self.speaker = espeakng.Speaker()
+        self.speaker.voice = 'zh'
+
+    def speak_text_callback(self, request, response):
+        self.get_logger().info('正在朗读 %s' % request.text)
+        self.speaker.say(request.text)
+        self.speaker.wait()
+        response.result = True
+        return response
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = Speaker('speaker')
+    rclpy.spin(node)
+    rclpy.shutdown()
+```
+launch文件  
+```python
+import os
+import launch
+import launch_ros
+from ament_index_python.packages import get_package_share_directory
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+
+
+def generate_launch_description():
+    # 获取与拼接默认路径
+    autopatrol_robot_dir = get_package_share_directory(
+        'duan_autopatrol_robot')
+    patrol_config_path = os.path.join(
+        autopatrol_robot_dir, 'config', 'patrol_config.yaml')
+    
+    action_node_turtle_control = launch_ros.actions.Node(
+        package='duan_autopatrol_robot',
+        executable='patrol_node',
+        parameters=[patrol_config_path]
+    )
+    action_node_patrol_client = launch_ros.actions.Node(
+        package='duan_autopatrol_robot',
+        executable='speaker',
+    )
+
+    return launch.LaunchDescription([
+        action_node_turtle_control,
+        action_node_patrol_client,
+    ])
+```
+注意启动三个launch文件  
+* 仿真
+* 自主导航  
+* 巡检 & 语音播报
+```bash
+colcon build
+source install/setup.bash
+ros2 launch duanbot_description gazebo_sim.launch.py
+ros2 launch duanbot_navigation2 navigation2.launch.py
+# ros2 run duan_autopatrol_robot patrol_node --ros-args --params-file /home/duan/Code/Duan-Ros2/duan-src/duan_ws/install/duan_autopatrol_robot/share/duan_autopatrol_robot/config/patrol_config.yaml
+ros2 launch duan_autopatrol_robot autopatrol.launch.py
+```
